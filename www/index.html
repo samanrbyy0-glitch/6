@@ -64,7 +64,6 @@ button{font:inherit;cursor:pointer}
 <div class="card" id="notescard" style="display:none"><h2>یادداشت‌های اخیر</h2><div id="notes"></div></div>
 <div class="card"><h2>دلیل‌های انجام نشدن برنامه‌ها</h2><div id="reasons"></div></div>
 <div id="msg"></div>
-<button class="lt" id="tst" style="margin-top:10px">تست الارم تمام‌صفحه (۱ دقیقه بعد)</button>
 </div>
 <div id="v2" style="display:none">
  <div class="card"><h2>کارهای من</h2><div class="pc">کاری که امروز انجام نشه، فردا دوباره همین‌جا میاد.</div>
@@ -208,7 +207,6 @@ $("ti").onkeydown=e=>{if(e.key==="Enter")$("ta").onclick()};
 function tab(n){$("v1").style.display=n===1?"":"none";$("v2").style.display=n===2?"":"none";$("tab1").classList.toggle("on",n===1);$("tab2").classList.toggle("on",n===2)}
 $("tab1").onclick=()=>tab(1);$("tab2").onclick=()=>tab(2);
 renderT();
-$("tst").onclick=async()=>{const AP=getAP();if(!AP){$("msg").textContent="پلاگین الارم پیدا نشد (Capacitor: "+(window.Capacitor?"هست":"نیست")+" | LN: "+(LN?"هست":"نیست")+")";return}try{await AP.testAlarm({seconds:60});let st={};try{st=await AP.status()}catch(_){}$("msg").textContent="تا ۱ دقیقه‌ی دیگه الارم میاد. الارم دقیق: "+(st.exact===false?"✗":"✓")+" | تمام‌صفحه: "+(st.fullScreen===false?"✗":"✓")+" — گوشی رو قفل کن و منتظر بمون."}catch(e){$("msg").textContent="خطا در تست: "+e}};
 $("wk").onclick=()=>{day.w=!isW(day);sv(dk,day);render();sched()};
 let ovCb=null;
 function showOv(t,p,cb){$("ovt").textContent=t;$("ovp").textContent=p;ovCb=cb;$("ovn").style.display=cb?"":"none";$("ovy").textContent=cb?"تأیید":"باشه";$("ov").style.display="flex"}

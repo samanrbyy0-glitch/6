@@ -34,3 +34,14 @@ if "AlarmReceiver" not in s:
     s = s.replace("</application>", comp + "    </application>", 1)
 open(mp, "w", encoding="utf8").write(s)
 print("patched manifest + java files")
+
+# --- app icon ---
+res_dst = "android/app/src/main/res"
+if os.path.isdir("icon-res"):
+    for root, _, files in os.walk("icon-res"):
+        rel = os.path.relpath(root, "icon-res")
+        dst = os.path.join(res_dst, rel)
+        os.makedirs(dst, exist_ok=True)
+        for f in files:
+            shutil.copy(os.path.join(root, f), os.path.join(dst, f))
+    print("icon copied")
