@@ -31,7 +31,7 @@ h1{font-size:1.2rem;margin:4px 0}h2{font-size:1rem;margin:0 0 8px}.sub{color:var
 .ch{display:flex;gap:6px}
 button{font:inherit;cursor:pointer}
 .ch button{border:1px solid var(--line);background:transparent;color:var(--mute);border-radius:9px;padding:3px 12px}
-.ch .on.y{color:var(--yes);border-color:var(--yes)}.ch .on.x{color:var(--no);border-color:var(--no)}
+.ch .on.y{background:var(--yes);color:#fff;border-color:var(--yes)}.ch .on.x{background:var(--no);color:#fff;border-color:var(--no)}.item.y{background:color-mix(in srgb,var(--yes) 12%,var(--card))}.item.x{background:color-mix(in srgb,var(--no) 12%,var(--card))}.plus{width:40px;height:40px;border-radius:50%;border:0;background:var(--acc);color:#fff;font-size:1.6rem;line-height:1;flex-shrink:0}
 .times{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
 .tm{border:1px solid var(--line);border-radius:9px;padding:0 10px;color:var(--mute);font-size:.85rem}
 .tm input{font:inherit;border:0;background:transparent;color:var(--ink);width:6.2em}
@@ -47,22 +47,135 @@ button{font:inherit;cursor:pointer}
 .cal i.g{background:var(--yes);color:#fff}.cal i.m{background:#e0a526;color:#fff}.cal i.r{background:var(--no);color:#fff}
 .note{width:100%;min-height:90px;font:inherit;font-size:.9rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:9px;padding:8px;margin-top:6px}
 #msg{color:var(--mute);font-size:.8rem;margin-top:10px}
-</style></head><body><main>
-<h1>لیست انجام وظایف</h1><div class="sub" id="day"></div>
+#tp{display:none;position:fixed;inset:0;background:#000a;z-index:10;align-items:center;justify-content:center;padding:20px}#tp .card{margin:0;text-align:center}
+.tph2{direction:ltr;font-size:2.4rem;display:flex;justify-content:center;align-items:center;gap:4px;margin-bottom:10px}.tph2 button{font:inherit;border:0;background:transparent;color:var(--mute);border-radius:10px;padding:0 8px}.tph2 button.on{background:var(--acc);color:#fff}
+#dial{position:relative;width:260px;height:260px;border-radius:50%;background:var(--line);margin:0 auto;touch-action:none;direction:ltr;user-select:none}
+.dn2{position:absolute;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;pointer-events:none}.dn2.in{font-size:.75rem;color:var(--mute)}.dn2.sel{background:var(--acc);color:#fff}
+.hand{position:absolute;left:129px;width:2px;background:var(--acc);transform-origin:50% 100%;pointer-events:none}.cdot{position:absolute;left:125px;top:125px;width:10px;height:10px;border-radius:50%;background:var(--acc);pointer-events:none}.dot2{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--acc);pointer-events:none}
+.tbtn{font:inherit;border:0;background:transparent;color:var(--ink);padding:2px 6px}
+.pen{border:0;background:transparent;font-size:1rem;padding:2px 6px}
+#ed{display:none;position:fixed;inset:0;background:#000a;z-index:8;align-items:center;justify-content:center;padding:20px}#ed .card{margin:0;width:100%;max-width:360px;max-height:90vh;overflow:auto}
+.plus.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);font-size:1.1rem}.plus.alt.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.item.ed{outline:1px dashed var(--acc);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.item.ed:not(.dragging){transition:transform .15s}.item.dragging{position:relative;z-index:5;box-shadow:0 8px 22px #0006;transition:none}
+#mn,#st{display:none;position:fixed;inset:0;background:#0008;z-index:8}#mn{padding:62px 14px}#mn .card{width:230px;margin:0}#st{align-items:center;justify-content:center;padding:20px}#st .card{margin:0;width:100%;max-width:360px;max-height:88vh;overflow:auto}
+.mi{display:block;width:100%;text-align:right;font:inherit;border:0;background:transparent;color:var(--ink);padding:10px 8px;border-radius:9px}.mi:active{background:var(--line)}.ck{display:flex;gap:10px;align-items:center;padding:8px 4px;border-top:1px solid var(--line)}.ck input{width:20px;height:20px;flex-shrink:0}
+#st2{display:none;position:fixed;inset:0;background:#0008;z-index:8;align-items:center;justify-content:center;padding:20px}#st2 .card{margin:0;width:100%;max-width:360px;max-height:88vh;overflow:auto}
+#wy{display:none;position:fixed;inset:0;background:#0008;z-index:8;align-items:center;justify-content:center;padding:20px}#wy .card{margin:0;width:100%;max-width:360px;max-height:88vh;overflow:auto}
+.cr{display:flex;justify-content:space-between;gap:8px;padding:6px 0 2px;border-top:1px solid var(--line);font-size:.92rem}.cb{height:6px;background:var(--no);border-radius:4px;opacity:.7;margin-bottom:4px}
+.cd{font-size:.85rem;color:var(--mute);padding:2px 0 8px}
+#wm{display:none;position:fixed;inset:0;background:#0008;z-index:8;align-items:center;justify-content:center;padding:20px}#wm .card{margin:0;width:100%;max-width:360px;max-height:88vh;overflow:auto}
+
+:root{--bg:#04130e;--card:rgba(4,22,16,.62);--ink:#e9f6ef;--mute:#8fa89b;--line:rgba(255,255,255,.1);--yes:#2bf59b;--no:#ff6b5e;--acc:#2bf59b;--ik:#04170f;--solid:#0b2218;--warn:#ff7a1a}
+@media(prefers-color-scheme:light){:root{--bg:#e9f7ef;--card:rgba(255,255,255,.72);--ink:#0b2418;--mute:#587367;--line:rgba(0,60,35,.14);--yes:#0f9d62;--no:#d9423e;--acc:#0f9d62;--ik:#fff;--solid:#fff}}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:radial-gradient(1100px 560px at 75% -10%,#0d4a33,transparent 70%),var(--bg);padding:16px 14px}
+@media(prefers-color-scheme:light){body{background:radial-gradient(1100px 560px at 75% -10%,#b9efd3,transparent 70%),var(--bg)}}
+.app{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:14px;border:1px solid var(--line);border-radius:34px;padding:14px;background:linear-gradient(160deg,rgba(255,255,255,.05),transparent);backdrop-filter:blur(14px)}
+main{max-width:none;padding:6px 4px 30px;margin:0}
+.side{display:none}
+h1{font-size:1.35rem;font-weight:800}.card,.item{backdrop-filter:blur(8px);border-radius:24px}.card{padding:16px}.item{border-radius:20px}
+.item.y{background:color-mix(in srgb,var(--yes) 14%,var(--card))}.item.x{background:color-mix(in srgb,var(--no) 14%,var(--card))}
+.tabs{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:4px}.tabs button{border:0;background:transparent;border-radius:26px}.tabs button.on{background:var(--acc);color:var(--ik);font-weight:800}
+.quote{background:linear-gradient(150deg,#2bf59b,#0f8f5c 60%,#0a3a28);color:#03140c;border-radius:26px;padding:18px 20px;line-height:1.9}
+.plus{background:var(--acc);color:var(--ik)}.plus.alt{background:var(--card);color:var(--ink)}.plus.alt.on{background:var(--acc);color:var(--ik)}
+.lt{border-radius:20px}.lt.on{background:var(--acc);color:var(--ik);border-color:var(--acc);font-weight:800}
+.ch .on.y{background:var(--yes);color:var(--ik);border-color:var(--yes);font-weight:800}.ch .on.x{background:var(--no);color:#fff}
+.bar{height:14px}.bar i{background:linear-gradient(90deg,#16a36a,#2bf59b)}.streak{color:var(--acc)}
+.col i{background:var(--acc)}.col.today i{background:var(--warn)}
+.cal i{border-radius:10px}.cal i.g{background:var(--yes);color:var(--ik)}.cal i.m{background:#ff9a2e;color:#1a0d00}.cal i.r{color:#fff}
+.reason,.note,.add2 input{border-radius:14px;background:rgba(255,255,255,.05)}.item.ed{outline-color:var(--acc)}
+#ov .card,#tp .card,#ed .card,#st .card,#st2 .card,#wy .card,#wm .card,#mn .card{background:var(--solid);backdrop-filter:none}
+.tph2 button.on,.dn2.sel{background:var(--acc);color:var(--ik)}.hand,.cdot,.dot2{background:var(--acc)}
+.rw{position:relative;width:150px;margin:6px auto}.rw svg{display:block}.rn{position:absolute;inset:0;display:grid;place-items:center;font-size:2rem;font-weight:800}
+#ringc{text-align:center}.big{font-size:2.6rem;font-weight:800;color:var(--acc);line-height:1.3}
+.ai{background:rgba(255,255,255,.05);border-radius:16px;padding:10px 12px;font-size:.88rem;line-height:1.9;margin-top:6px}
+@media(min-width:900px){
+.app{grid-template-columns:78px 1fr}
+.side{display:flex;flex-direction:column;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:14px 0}
+.side nav{display:flex;flex-direction:column;gap:10px}.logo{font-weight:800;color:var(--acc);font-size:1.5rem}
+.ic{position:relative;width:46px;height:46px;border-radius:50%;border:0;background:transparent;color:var(--mute);font-size:1.15rem;display:grid;place-items:center}
+.ic.on{background:var(--acc);color:var(--ik)}
+.ic[data-n]:not([data-n=""])::after{content:attr(data-n);position:absolute;top:-2px;left:-2px;background:var(--warn);color:#fff;border-radius:10px;font-size:.65rem;padding:0 5px}
+.tabs{display:none}
+#v2{display:grid;gap:14px;max-width:660px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+:root[data-theme="dark"]{--bg:#04130e;--card:rgba(4,22,16,.62);--ink:#e9f6ef;--mute:#8fa89b;--line:rgba(255,255,255,.1);--yes:#2bf59b;--no:#ff6b5e;--acc:#2bf59b;--ik:#04170f;--solid:#0b2218}
+:root[data-theme="light"]{--bg:#e9f7ef;--card:rgba(255,255,255,.72);--ink:#0b2418;--mute:#587367;--line:rgba(0,60,35,.14);--yes:#0f9d62;--no:#d9423e;--acc:#0f9d62;--ik:#fff;--solid:#fff}
+:root[data-theme="dark"] body{background:radial-gradient(1100px 560px at 75% -10%,#0d4a33,transparent 70%),var(--bg)}
+:root[data-theme="light"] body{background:radial-gradient(1100px 560px at 75% -10%,#b9efd3,transparent 70%),var(--bg)}
+:root[data-theme="light"] .reason,:root[data-theme="light"] .note,:root[data-theme="light"] .add2 input,:root[data-theme="light"] .ai{background:rgba(0,60,35,.05)}
+.tb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:4px}.seg button{border:0;background:transparent;color:var(--mute);border-radius:50%;width:36px;height:36px;font-size:1rem}.seg button.on{background:var(--acc);color:var(--ik)}
+.sq{flex:1;min-width:150px;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:9px 18px;color:var(--ink);font:inherit}
+.gr{margin-inline-start:auto;font-weight:600;color:var(--mute);font-size:.9rem}
+.bell{position:relative;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:1.05rem}
+.bell b{position:absolute;top:-4px;left:-4px;background:var(--warn);color:#fff;border-radius:10px;font-size:.65rem;padding:0 6px;font-weight:600}.bell b:empty{display:none}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;background:linear-gradient(150deg,#2bf59b,#0a3a28)}
+.chips{display:grid;gap:8px;margin-top:14px}.chips span{display:flex;justify-content:space-between;gap:8px;border:1.5px solid #03140c;border-radius:30px;padding:6px 16px;font-size:.85rem;font-weight:600}
+.chips span:nth-child(2){margin-inline-start:18px}.chips span:nth-child(3){margin-inline-start:36px}
+#ovp{white-space:pre-wrap;line-height:1.9;font-size:.9rem;max-height:55vh;overflow:auto}.cal i{cursor:pointer}
+#goalc .note{margin-top:2px}.chips i{font-style:normal}
+
+.chips button{display:flex;justify-content:space-between;gap:8px;border:1.5px solid #03140c;background:transparent;color:#03140c;border-radius:30px;padding:7px 16px;font-weight:600;font-size:.9rem}
+.chips button.on{background:#03140c;color:#2bf59b}.chips button:nth-child(2){margin-inline-start:18px}.chips button:nth-child(3){margin-inline-start:36px}
+.cpanel{background:#03140c;color:#e9f6ef;border-radius:20px;padding:12px;margin-top:14px;font-weight:400}.cpanel svg{display:block;direction:ltr;width:100%;height:auto}
+#cht{font-weight:800;font-size:.92rem;margin-bottom:6px}.cap{font-size:.78rem;color:#8fa89b;margin-top:6px;line-height:1.8}
+.ct{font-size:.7rem;border-radius:12px;padding:1px 9px;margin-inline-start:6px;font-weight:600}
+.k0{background:rgba(89,195,255,.2);color:#59c3ff}.k1{background:rgba(255,122,26,.2);color:#ff7a1a}.k2{background:rgba(183,140,255,.2);color:#b78cff}
+.catp{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+
+.tabs{display:none!important}
+.side{display:flex;flex-direction:row;align-items:center;gap:8px;overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:8px 12px}
+.side nav{display:flex;flex-direction:row;align-items:center;gap:8px}
+.logo{font-weight:800;color:var(--acc);font-size:1.5rem;flex-shrink:0}
+.ic{position:relative;flex-shrink:0;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--mute);font-size:1.1rem;display:grid;place-items:center}.ic.on{background:var(--acc);color:var(--ik)}
+.ic[data-n]:not([data-n=""])::after{content:attr(data-n);position:absolute;top:-2px;left:-2px;background:var(--warn);color:#fff;border-radius:10px;font-size:.65rem;padding:0 5px}
+.side .plus{width:44px;height:44px;flex-shrink:0;font-size:1.05rem}.side .lt{flex-shrink:0;font-size:.7rem;padding:5px 10px;line-height:1.25;text-align:center}
+#em{border-color:var(--no);color:var(--no)}#em.on{background:var(--no);color:#fff;border-color:var(--no)}
+.bell{margin-inline-start:auto}
+#v1{display:flex;flex-direction:column;gap:14px}.colM,.colS{display:flex;flex-direction:column;gap:14px;min-width:0}.colM>.card,.colS>.card{margin-bottom:0}
+.wk{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.wk h2{margin:0}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:5px 14px;font-size:.82rem;color:var(--mute)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.d{border:1px solid transparent;background:transparent;border-radius:16px;padding:6px 0;text-align:center;color:var(--mute);font-size:.76rem;line-height:1.5}
+.d b{display:block;font-size:1.1rem;color:var(--ink)}.d.sel{background:var(--acc);color:var(--ik)}.d.sel b{color:var(--ik)}.d.now:not(.sel){border-color:var(--acc)}
+.dd{display:block;width:6px;height:6px;border-radius:50%;margin:2px auto 0}.dd.g{background:var(--yes)}.dd.m{background:#ffd23f}.dd.r{background:var(--no)}.dd.e{background:#59c3ff}.d.sel .dd{outline:1.5px solid var(--ik)}
+.cph{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.cpanel .pill{background:rgba(255,255,255,.07);color:#cfe9dc;border-color:rgba(255,255,255,.12)}
+.lg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline:8px 3px}.chips button{justify-content:center}
+@media(min-width:900px){.side{flex-direction:column;justify-content:flex-start;overflow:visible;padding:14px 0}.side nav{flex-direction:column}.side .lt{width:62px;padding:6px 2px;font-size:.62rem}.side>.ic:last-child{margin-top:auto}
+#v1{display:grid;grid-template-columns:1.25fr 1fr;align-items:start}}
+
+#ins,#bk,#rq,#lw,#pn{display:none;position:fixed;inset:0;background:#0008;z-index:8;align-items:center;justify-content:center;padding:20px}#rqp{white-space:pre-wrap;line-height:1.9;font-size:.9rem;max-height:50vh;overflow:auto}.late{white-space:nowrap;background:rgba(255,122,26,.2);color:#ff7a1a}#lw .head{flex-direction:column;align-items:stretch}#lw .lt{padding:8px 10px}#pnt{min-height:130px}
+#ins .card,#bk .card,#rq .card,#lw .card,#pn .card{margin:0;width:100%;max-width:400px;max-height:88vh;overflow:auto;background:var(--solid);backdrop-filter:none}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.kp div{background:rgba(127,127,127,.1);border-radius:16px;padding:8px 4px;text-align:center;font-size:.72rem;color:var(--mute)}.kp b{display:block;font-size:1.25rem;color:var(--ink)}
+.mb{display:flex;align-items:center;gap:8px;font-size:.8rem;padding:2px 0}.mb span:first-child{width:4.6em;color:var(--mute)}.mb i{display:block;height:10px;border-radius:6px;background:var(--acc)}.mb em{font-style:normal;font-size:.75rem}
+.insh{margin:16px 0 4px;font-size:.95rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.mi{display:flex;gap:10px;align-items:center}.mi+.mi{border-top:1px solid var(--line)}
+#bkm{font-size:.85rem;margin-top:8px;color:var(--mute);min-height:1.4em}
+.side #lt,.side #em{width:44px;height:44px;padding:0;border-radius:50%;display:grid;place-items:center;line-height:0}
+.col.today span:last-child{font-weight:800;color:var(--ink)}
+</style><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet"></head><body><div class="app"><aside class="side"><nav id="snav"><button class="ic on" id="sb1" aria-label="برنامه روزانه">⌂</button><button class="ic" id="sb2" aria-label="کارهای من">☑</button><button class="ic" id="sb3" aria-label="مانع‌های تکرارشده">📊</button></nav><div class="ic" aria-hidden="true">◐</div></aside><main>
+<div class="tb"><div class="seg"><button id="tmD" aria-label="تم تیره">☾</button><button id="tmL" aria-label="تم روشن">☀</button></div><input id="sq" class="sq" type="search" placeholder="جستجوی کار…"><button class="bell" id="bell" aria-label="کارهای مانده">🔔<b id="bb"></b></button></div>
+<div class="head"><div style="display:flex;align-items:center;gap:10px"><button class="plus alt" id="menu" aria-label="منو">✦</button><h1>لیست انجام وظایف</h1></div><div style="display:flex;gap:8px"><button class="plus alt" id="pencil" aria-label="ویرایش کارها">✏️</button><button class="plus" id="plus" aria-label="افزودن کار">+</button></div></div><div class="sub" id="day"></div>
 <div class="tabs"><button id="tab1" class="on">برنامه روزانه</button><button id="tab2">کارهای من</button></div>
 <div id="v1">
-<div class="quote" id="quote"></div>
-<div class="card">
- <div class="head"><h2>امروز</h2><button class="lt" id="lt">روز سبک</button><button class="lt" id="wk">آخر هفته</button><button class="lt" id="em">روز ضروری</button><div class="streak" id="streak"></div></div>
+<div class="quote" id="quotec"><div id="quote"></div><h2 style="margin:16px 0 2px;font-size:1rem">حوزه‌های رشد</h2><div class="sub" style="color:#064d31">روی هر حوزه بزن تا کارها فیلتر شوند</div><div class="chips" id="chips" style="margin-top:10px"></div><div class="cpanel"><div class="cph"><button class="pill" id="cwp">هفته قبل</button><div id="cht">کندل هفتگی</div><button class="pill" id="cwn">هفته بعد</button></div><svg id="cdl" viewBox="0 0 340 176"></svg><div class="cap" id="cdr"></div><div class="cap lg"><i style="background:#2bf59b"></i>بالای ۷۵٪<i style="background:#ffb02e"></i>۵۰ تا ۷۵٪<i style="background:#ff6b5e"></i>زیر ۵۰٪</div></div></div>
+<div class="card" id="todayc">
+ <div class="head"><h2>امروز</h2><button class="lt" id="lt">STEADY</button><button class="lt" id="em">PROTOCOL ZERO</button><div class="streak" id="streak"></div></div>
  <div class="bar"><i id="fill"></i></div><div class="pc" id="pc"></div>
  <div class="week" id="week"></div>
- <div class="skip" id="skip"></div>
+ <div class="skip" id="skip"><button class="lt" id="skb">📊 کدام مانع‌ها تکرار شدند؟</button></div>
 </div>
+<div class="card" id="ringc"><h2>پیشرفت روز انتخابی</h2><div class="rw"><svg width="150" height="150" viewBox="0 0 140 140"><circle cx="70" cy="70" r="58" fill="none" stroke="var(--line)" stroke-width="12"/><circle id="arc" cx="70" cy="70" r="58" fill="none" stroke="var(--warn)" stroke-width="12" stroke-linecap="round" transform="rotate(-90 70 70)" stroke-dasharray="364.4" stroke-dashoffset="364.4" style="transition:stroke-dashoffset .5s"/></svg><div class="rn" id="rn"></div></div><div class="ai" id="ai"></div></div>
+<div class="card" id="scorec"><div class="pc">امتیاز کل</div><div class="big" id="sc"></div><div class="pc">هر Yes ۲۰ امتیاز</div></div>
+<div class="card" id="goalc"><h2>هدف من</h2><textarea class="note" id="goal" placeholder="هدف اصلی‌ات را اینجا بنویس…"></textarea></div>
+<div class="card" id="addc" style="display:none"><h2>کار جدید</h2><input id="an" class="reason" placeholder="اسم کار..." style="margin-top:0"><div class="pc" style="margin-top:10px">این کار در کدام دسته باشد؟</div><div class="catp" id="catp"></div><div class="times" id="at"></div><div class="head" style="margin-top:12px"><button class="lt on" id="as">ذخیره</button><button class="lt" id="ac">لغو</button></div></div>
+<div class="card" id="weekc"><div class="wk"><button class="pill" id="wpv">هفته قبل</button><div style="text-align:center"><h2 id="ttl"></h2><button class="pill" id="gt" style="display:none;margin-top:4px;padding:2px 12px;font-size:.75rem">↺ امروز</button></div><button class="pill" id="wnx">هفته بعد</button></div><div class="days" id="days"></div></div>
 <div id="list"></div>
 <div class="card" id="notecard" style="display:none"><h2>یادداشت شبانه</h2><div class="pc">امروز چی یاد گرفتم؟ فردا چی رو بهتر کنم؟</div><textarea class="note" id="note" placeholder="بنویس..."></textarea></div>
-<div class="card"><h2>۳۰ روز اخیر</h2><div class="cal" id="cal"></div></div>
+<div id="calc" style="display:none"><h2>۳۰ روز اخیر</h2><div class="cal" id="cal"></div></div>
 <div class="card" id="notescard" style="display:none"><h2>یادداشت‌های اخیر</h2><div id="notes"></div></div>
-<div class="card"><h2>دلیل‌های انجام نشدن برنامه‌ها</h2><div id="reasons"></div></div>
 <div id="msg"></div>
 </div>
 <div id="v2" style="display:none">
@@ -71,51 +184,66 @@ button{font:inherit;cursor:pointer}
  <div id="tl"></div>
  <div class="card" id="tdc" style="display:none"><h2>انجام‌شده‌های امروز</h2><div id="td"></div></div>
 </div>
-</main>
+</main></div>
+<div id="mn"><div class="card"><button class="mi" id="mst">STEADY</button><button class="mi" id="min">📈 آمار کامل</button><button class="mi" id="mpn">⚖️ جریمه‌های من</button><button class="mi" id="mbk">💾 پشتیبان‌گیری و بازیابی</button><button class="lt mi" id="wk">WEEKEND MODE</button></div></div>
+<div id="st"><div class="card"><h2>STEADY</h2><div class="pc" id="std"></div><div class="pc" id="stc" style="margin:8px 0;font-weight:bold"></div><div id="stl"></div><div class="head" style="margin-top:12px"><button class="lt on" id="stx">بستن</button></div></div></div>
+<div id="wy"><div class="card"><h2>مانع‌های تکرارشده</h2><div class="pc">۷ روز اخیر. مانع‌هایی که یکسان نوشته شوند با هم شمرده می‌شوند.</div><div id="wyb"></div><div class="head" style="margin-top:12px"><button class="lt on" id="wyx">بستن</button></div></div></div>
+<div id="wm"><div class="card"><h2>WEEKEND MODE</h2><div class="pc" id="wmd"></div><h2 style="margin-top:14px">برای چه روزهایی؟</h2><div id="wml"></div><div class="head" style="margin-top:12px"><button class="lt on" id="wmx">بستن</button></div></div></div>
+<div id="st2"><div class="card"><h2>مانع‌های ثبت‌شده</h2><div id="reasons"></div><div class="head" style="margin-top:12px"><button class="lt on" id="rsx">بستن</button></div></div></div>
+<div id="ed"><div class="card"><h2>ویرایش کار</h2><input id="en" class="reason" style="margin-top:0" placeholder="اسم کار..."><div class="pc" style="margin-top:10px">دسته</div><div class="catp" id="catpe"></div><div class="times" id="et"></div><div class="head" style="margin-top:12px"><button class="lt on" id="esv">ذخیره</button><button class="lt" id="ex">بستن</button><button class="lt" id="edel" style="border-color:var(--no);color:var(--no)">حذف</button></div></div></div>
+<div id="tp"><div class="card"><div class="tph2"><button id="tph"></button>:<button id="tpm"></button></div><div id="dial"></div><div class="head" style="margin-top:12px"><button class="lt on" id="tpok">تأیید</button><button class="lt" id="tpx">لغو</button></div></div></div>
+<div id="ins"><div class="card"><h2>آمار کامل</h2><div id="insb"></div><div class="head" style="margin-top:12px"><button class="lt on" id="insx">بستن</button></div></div></div>
+<div id="bk"><div class="card"><h2>پشتیبان‌گیری و بازیابی</h2><div class="pc">همه‌ی کارها، روزها، یادداشت‌ها و تنظیمات در یک فایل ذخیره می‌شود. برای انتقال به گوشی یا مرورگر دیگر، فایل را همان‌جا بازیابی کن.</div><div class="head" style="margin-top:12px"><button class="lt on" id="bke">دانلود فایل پشتیبان</button><button class="lt" id="bki">بازیابی از فایل</button></div><input type="file" id="bkf" accept=".json,application/json" style="display:none"><div id="bkm" role="status"></div><div class="head" style="margin-top:12px"><button class="lt" id="bkx">بستن</button></div></div></div>
+<div id="rq"><div class="card"><h2 id="rqt"></h2><div id="rqp"></div><div class="head" style="margin-top:12px"><button class="lt on" id="rqy"></button><button class="lt" id="rqn">نه</button></div></div></div>
+<div id="lw"><div class="card"><h2 id="lwt"></h2><div class="pc" id="lwp"></div><div id="lwpen" style="margin:10px 0;font-weight:bold"></div><div class="head" style="margin-top:12px"><button class="lt on" id="lwa">کوچیک‌ترش کن</button><button class="lt" id="lwb">زمانش را عوض کن</button><button class="lt" id="lwc" style="border-color:var(--no);color:var(--no)">حذفش کن</button><button class="lt" id="lwd">بعداً</button></div></div></div>
+<div id="pn"><div class="card"><h2>جریمه‌های من</h2><div class="pc">هر خط یک جریمه. وقتی کاری ۳ بار پشت‌سرهم عقب بیفتد، یکی از این‌ها نشانت داده می‌شود. هر وقت خواستی عوضشان کن.</div><textarea class="note" id="pnt"></textarea><div class="head" style="margin-top:12px"><button class="lt on" id="pns">ذخیره</button><button class="lt" id="pnx">بستن</button></div></div></div>
 <div id="ov"><div class="card"><h2 id="ovt"></h2><div id="ovp"></div><div class="head" style="margin-top:12px"><button class="lt on" id="ovy">باشه</button><button class="lt" id="ovn">لغو</button></div></div></div>
 <script>
-const DEF=[["ساعت ۶ بیدار شدن",["06:00"]],["شنا ۱۵ + شکم ۲۰ تا + پلانک ۱.۵ دقیقه",["06:25"]],["پیاده‌روی صبح",["07:00"]],["خوردن دانه چیا + ویتامین C + قهوه",["08:00"]],["تخم‌مرغ + سیب‌زمینی",["09:00"]],["چک کردن چارت",["10:00"]],["دوش آب سرد",["10:15"]],["آموزش کار",["10:30"]],["کتاب اول",["11:40"]],["ترید",["09:50","15:20","16:20"]],["کتاب دوم",["18:30"]],["تمرین زبان",["17:00"]],["باشگاه و تفریح برای آرامش ذهن",["20:00"]],["خواب ساعت 00:00",["23:45","23:59"]],["چک کردن هفته معاملاتی",["09:50","15:20","16:20"]]];
-const ORD=[0,1,2,3,4,5,6,7,8,9,14,10,11,12,13];
-const LIGHT=[0,1,3,7,13];
-const Q=["کار کوچیکِ هر روز، از تصمیم بزرگِ یک روز بیشتر می‌ارزه.","لازم نیست عالی باشی؛ فقط امروز رو خالی نذار.","انضباط یعنی انجام دادن کار، حتی وقتی حوصله‌ش رو نداری.","زنجیره‌ات رو نشکن؛ امروز فقط یه حلقه‌ی دیگه اضافه کن.","حال خوب بعد از کار میاد، نه قبلش.","دیروز گذشته؛ امروز تنها چیزیه که دستته.","هر Yes یه رأی به آدمیه که می‌خوای بشی.","کار سخت رو اول انجام بده؛ بقیه‌ی روز سبک‌تره.","پنج دقیقه شروع کن؛ ادامه‌ش خودش میاد.","بهانه‌ها رو بنویس و بخون؛ الگوشون رو که ببینی، راهشون رو پیدا می‌کنی.","پیشرفت آهسته هم پیشرفته؛ فقط متوقف نشو.","امروز یه روز تازه‌ست و هیچ اشتباهی روش ثبت نشده.","اگه یه کار رو جا انداختی، دلیلش رو بنویس و برو سراغ بعدی.","بدنت و ذهنت چیزی رو تمرین می‌کنن که تکرار می‌کنی.","خسته‌ای؟ سبک‌تر برو، ولی نایست.","آدم موفق هر روز حس نمی‌کنه؛ هر روز انجام می‌ده.","قولی که به خودت می‌دی، مهم‌ترین قوله.","کوچیک شروع کن، ثابت بمون، بزرگ شو.","فردا از امروزِ تو تشکر می‌کنه.","تمرکز یعنی یه کار رو درست انجام دادن، نه همه رو نیمه‌کاره.","یه روز بد، یه روز بده؛ نه یه شکست.","عادت‌ها جای انگیزه رو می‌گیرن؛ فقط باید جا بیفتن.","الان که دلت نمی‌خواد، همون وقتیه که ارزش داره.","صبح خوب از شب قبل ساخته می‌شه؛ امشب به موقع بخواب.","خودت رو با دیروزِ خودت مقایسه کن، نه با دیگران.","کم‌کم رسیدن، بهتر از هیچ‌وقت نرسیدنه.","هر چی ثبت کنی، بهتر می‌فهمی.","امروز رو طوری بساز که بشه به‌ش افتخار کرد.","سخته؟ یعنی داری رشد می‌کنی.","تمرین امروز، عادت فردا و شخصیت یک سال بعده."];
+const DEF=[];let SQ="",CF=null,nc=null,ec="کار";const CATS=["کار","سلامت","یادگیری"],cat=t=>CATS.includes(t[3])?t[3]:"کار";
+let steady=null;
+const LIGHT=()=>steady?steady.filter(id=>T(id)):tasks.slice(0,5).map(t=>t[2]);
+const Q=["کار کوچیکِ هر روز، از تصمیم بزرگِ یک روز بیشتر می‌ارزه.","لازم نیست عالی باشی؛ فقط امروز رو خالی نذار.","انضباط یعنی انجام دادن کار، حتی وقتی حوصله‌ش رو نداری.","زنجیره‌ات رو نشکن؛ امروز فقط یه حلقه‌ی دیگه اضافه کن.","حال خوب بعد از کار میاد، نه قبلش.","دیروز گذشته؛ امروز تنها چیزیه که دستته.","هر Yes یه رأی به آدمیه که می‌خوای بشی.","کار سخت رو اول انجام بده؛ بقیه‌ی STEADY‌تره.","پنج دقیقه شروع کن؛ ادامه‌ش خودش میاد.","بهانه‌ها رو بنویس و بخون؛ الگوشون رو که ببینی، راهشون رو پیدا می‌کنی.","پیشرفت آهسته هم پیشرفته؛ فقط متوقف نشو.","امروز یه روز تازه‌ست و هیچ اشتباهی روش ثبت نشده.","اگه یه کار رو جا انداختی، دلیلش رو بنویس و برو سراغ بعدی.","بدنت و ذهنت چیزی رو تمرین می‌کنن که تکرار می‌کنی.","خسته‌ای؟ سبک‌تر برو، ولی نایست.","آدم موفق هر روز حس نمی‌کنه؛ هر روز انجام می‌ده.","قولی که به خودت می‌دی، مهم‌ترین قوله.","کوچیک شروع کن، ثابت بمون، بزرگ شو.","فردا از امروزِ تو تشکر می‌کنه.","تمرکز یعنی یه کار رو درست انجام دادن، نه همه رو نیمه‌کاره.","یه روز بد، یه روز بده؛ نه یه شکست.","عادت‌ها جای انگیزه رو می‌گیرن؛ فقط باید جا بیفتن.","الان که دلت نمی‌خواد، همون وقتیه که ارزش داره.","صبح خوب از شب قبل ساخته می‌شه؛ امشب به موقع بخواب.","خودت رو با دیروزِ خودت مقایسه کن، نه با دیگران.","کم‌کم رسیدن، بهتر از هیچ‌وقت نرسیدنه.","هر چی ثبت کنی، بهتر می‌فهمی.","امروز رو طوری بساز که بشه به‌ش افتخار کرد.","سخته؟ یعنی داری رشد می‌کنی.","تمرین امروز، عادت فردا و شخصیت یک سال بعده."];
 const qi=d=>Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)%30;
 const getAP=()=>{const C=window.Capacitor;if(!C)return null;try{if(C.isNativePlatform&&!C.isNativePlatform())return null;return (C.Plugins&&C.Plugins.DailyAlarm)||(C.registerPlugin?C.registerPlugin("DailyAlarm"):null)}catch(e){return null}};
 const $=id=>document.getElementById(id),LN=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications;
 const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const fa=n=>Number(n).toLocaleString("fa-IR");
-const now=new Date(),key=d=>"day:"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),dk=key(now);
-let tasks=DEF,day=ld(dk,{s:{},r:{}}),tmr;
+const now=new Date(),key=d=>"day:"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),TK=key(now);let dk=TK;
+let editMode=false;let wdays=ld("wdays",[4,5]);steady=ld("steady",null);
+let tasks=ld("tasks",DEF).map((t,i)=>[t[0],t[1],t[2]!==undefined?t[2]:100+i,t[3]]),day=ld(dk,{s:{},r:{}}),tmr;
+const T=id=>tasks.find(t=>String(t[2])===String(id));
 const ago=k=>{const d=new Date(now);d.setDate(now.getDate()-k);return d};
-const rec=k=>k===0?day:ld(key(ago(k)),null);
-const vis=(r,k)=>{if(r.e)return[];if(r.l)return LIGHT;const w=r.w!==undefined?r.w:[0,6].includes(ago(k).getDay());return tasks.map((_,i)=>i).filter(i=>i===9?!w:i===14?w:true)};
+const TD=()=>dk===TK?day:ld(TK,{s:{},r:{}});const rec=k=>k===0?TD():ld(key(ago(k)),null);
+const vis=(r,k)=>{if(r.e)return[];if(r.l)return LIGHT();return tasks.map(t=>t[2])};
 const ym=d=>new Intl.DateTimeFormat("fa-IR-u-ca-persian-nu-latn",{year:"numeric",month:"numeric"}).format(d);
 const LIM_L=3,LIM_E=2;
 function usedCount(f){let n=0;const m=ym(now);for(let k=1;k<=31;k++){if(ym(ago(k))!==m)break;const r=rec(k);if(r&&r[f])n++}return n}
-const isW=r=>r.w!==undefined?r.w:[0,6].includes(now.getDay());
-const pct=(r,k)=>{if(!r||r.e)return 0;const v=vis(r,k);return Math.round(v.filter(i=>r.s[i]==="y").length/v.length*100)};
+const isW=r=>r.w!==undefined?r.w:wdays.includes(now.getDay());
+const pct=(r,k)=>{if(!r||r.e)return 0;const v=vis(r,k);return Math.round(v.filter(i=>r.s[i]==="y").length/(v.length||1)*100)};
 $("quote").textContent="💬 "+Q[qi(now)];
 $("day").textContent=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{weekday:"long",year:"numeric",month:"long",day:"numeric"}).format(now);
 function saveTasks(){sv("tasks",tasks);clearTimeout(tmr);tmr=setTimeout(sched,600)}
-function stats(){
+function stats(){stats0();extra()}
+const IA='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">',
+IST=IA+'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+IEM=IA+'<path d="M12 3v8"/><path d="M6.4 6.6a8 8 0 1 0 11.2 0"/></svg>';
+function stats0(){
  const p=pct(day,0);$("fill").style.width=p+"%";
  const V=vis(day,0),yes=V.filter(i=>day.s[i]==="y").length;
  $("lt").classList.toggle("on",!!day.l);$("em").classList.toggle("on",!!day.e);
- const uL=usedCount("l")+(day.l?1:0),uE=usedCount("e")+(day.e?1:0);$("lt").textContent="روز سبک · "+fa(LIM_L-uL)+" باقی";$("em").textContent="روز ضروری · "+fa(LIM_E-uE)+" باقی";$("wk").classList.toggle("on",isW(day));
- $("pc").textContent=day.e?"روز ضروری: همه‌ی کارهای امروز کنسل شد و در آمار حساب نمی‌شود.":fa(yes)+" از "+fa(V.length)+" کار انجام شده ("+fa(p)+"٪)";
+ const uL=usedCount("l")+(day.l?1:0),uE=usedCount("e")+(day.e?1:0);$("lt").innerHTML=IST;$("lt").title="STEADY";$("lt").setAttribute("aria-label","STEADY");$("em").innerHTML=IEM;$("em").title="PROTOCOL ZERO";$("em").setAttribute("aria-label","PROTOCOL ZERO");$("wk").classList.toggle("on",isW(day));
+ $("pc").textContent=day.e?"PROTOCOL ZERO: همه‌ی کارهای امروز کنسل شد و در آمار حساب نمی‌شود.":fa(yes)+" از "+fa(V.length)+" کار انجام شده ("+fa(p)+"٪)";
  let n=0;for(let k=0;k<400;k++){const rr=rec(k);if(rr&&rr.e)continue;const q=pct(rr,k);if(q>=70)n++;else if(k===0)continue;else break}
  $("streak").textContent=n?"🔥 "+fa(n)+" روز پشت‌هم":"زنجیره از امروز شروع می‌شود";
  const W=$("week");W.innerHTML="";
  for(let k=6;k>=0;k--){const q=pct(rec(k),k),c=document.createElement("div");c.className="col"+(k===0?" today":"");
-  const re=rec(k),E=re&&re.e;c.innerHTML='<span>'+(E?"ض":fa(q))+'</span><i style="height:'+(E?8:Math.max(q*0.6,3))+'px'+(E?";background:#4aa3df":"")+'"></i><span>'+new Intl.DateTimeFormat("fa-IR",{weekday:"short"}).format(ago(k))+'</span>';W.appendChild(c)}
- const cnt={};for(let k=0;k<7;k++){const r=rec(k);if(r)Object.keys(r.s).forEach(i=>{if(r.s[i]==="x")cnt[i]=(cnt[i]||0)+1})}
- const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,3).filter(e=>tasks[e[0]]);
- $("skip").innerHTML=top.length?"بیشتر از همه جا ماندند: "+top.map(e=>"<b>"+tasks[e[0]][0].replace(/</g,"&lt;")+"</b> ("+fa(e[1])+" بار)").join("، "):"هنوز کاری جا نمانده.";
+  const re=rec(k),E=re&&re.e;c.innerHTML='<span>'+(E?"ض":fa(q))+'</span><i style="height:'+(E?8:Math.max(q*0.6,3))+'px'+(E?";background:#4aa3df":";background:"+(!(re&&re.s&&Object.keys(re.s).length)?"var(--line)":q>75?"#2bf59b":q>=50?"#ffb02e":"#ff6b5e"))+'"></i><span>'+new Intl.DateTimeFormat("fa-IR",{weekday:"short"}).format(ago(k))+'</span>';W.appendChild(c)}
  const R=$("reasons");R.innerHTML="";let c=0;
  for(let k=0;k<7&&c<8;k++){const r=rec(k);if(!r)continue;
-  Object.keys(r.s).forEach(i=>{if(r.s[i]==="x"&&r.r[i]&&r.r[i].trim()&&tasks[i]&&c<8){c++;
+  Object.keys(r.s).forEach(i=>{if(r.s[i]==="x"&&r.r[i]&&r.r[i].trim()&&T(i)&&c<8){c++;
    const d=document.createElement("div");d.className="rs";
-   const s=document.createElement("small");s.textContent=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{month:"short",day:"numeric"}).format(ago(k))+" · "+tasks[i][0];
+   const s=document.createElement("small");s.textContent=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{month:"short",day:"numeric"}).format(ago(k))+" · "+T(i)[0];
    const t=document.createElement("div");t.textContent=r.r[i];d.append(s,t);R.appendChild(d)}})}
  const C=$("cal");C.innerHTML="";
  for(let k=29;k>=0;k--){const r=rec(k),q=pct(r,k),has=r&&Object.keys(r.s).length,e=document.createElement("i");
@@ -125,26 +253,27 @@ function stats(){
   const sm=document.createElement("small");sm.textContent=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{month:"short",day:"numeric"}).format(ago(k));
   const t=document.createElement("div");t.textContent=r.n;d.append(sm,t);N.appendChild(d)}}
  $("notescard").style.display=nc?"":"none";
- if(!c)R.innerHTML='<div class="rs"><small>وقتی کاری را No بزنی و دلیلش را بنویسی، اینجا جمع می‌شود.</small></div>';
+ if(!c)R.innerHTML='<div class="rs"><small>وقتی کاری را No بزنی و بنویسی چی جلویت را گرفت، اینجا جمع می‌شود.</small></div>';
 }
 function render(){
- const L=$("list");L.innerHTML="";
- let num=0;const VS=vis(day,0);
- ORD.forEach(i=>{const t=tasks[i];
-  if(!VS.includes(i))return;
-  const s=day.s[i],el=document.createElement("div");el.className="item "+(s||"");
-  el.innerHTML='<div class="top"><div class="t">'+fa(++num)+". "+t[0]+'</div><div class="ch"><button class="y'+(s==="y"?" on":"")+'">Yes</button><button class="x'+(s==="x"?" on":"")+'">No</button></div></div><div class="times"></div><input class="reason" placeholder="دلیل...">';
+ const L=$("list");L.innerHTML="";const cards=[];if(editMode&&tasks.length){const hh=document.createElement("div");hh.className="card pc";hh.textContent="روی هر کار بزن تا ویرایش یا حذفش کنی. نگه دار و بالا/پایین بکش تا جابه‌جا شود.";L.appendChild(hh)}
+ let num=0;const VS=vis(day,0),LK={};tasks.forEach(t=>{LK[t[2]]=late(t[2])});const ORD=editMode?tasks:tasks.map((t,x)=>[t,x]).sort((a,b)=>(LK[b[0][2]]-LK[a[0][2]])||a[1]-b[1]).map(z=>z[0]);
+ ORD.forEach(t=>{const i=t[2];
+  if(!VS.includes(i))return;if(SQ&&!t[0].includes(SQ))return;if(CF&&cat(t)!==CF)return;
+  const s=day.s[i],el=document.createElement("div");el.className="item "+(s||"")+(editMode?" ed":"");
+  el.innerHTML='<div class="top"><div class="t">'+fa(++num)+". "+t[0]+' <span class="ct k'+CATS.indexOf(cat(t))+'">'+cat(t)+'</span>'+(LK[i]?' <span class="ct late">عقب‌افتاده ×'+fa(LK[i])+'</span>':'')+'</div><div class="ch"><button class="y'+(s==="y"?" on":"")+'">Yes</button><button class="x'+(s==="x"?" on":"")+'">No</button></div></div><div class="times"></div>'+(s==="x"?'<input class="reason" placeholder="چی جلومو گرفت؟">':'');
   const [by,bx]=el.querySelectorAll(".ch button");
-  by.onclick=()=>pick(i,"y");bx.onclick=()=>pick(i,"x");
-  const r=el.querySelector(".reason");r.value=day.r[i]||"";r.oninput=()=>{day.r[i]=r.value;sv(dk,day)};r.onchange=stats;
+  by.onclick=()=>pick(i,"y");bx.onclick=()=>pick(i,"x");cards.push({el,t});if(editMode)attachDrag(el,t,cards);
+  const r=el.querySelector(".reason");if(r){r.value=day.r[i]||"";r.oninput=()=>{day.r[i]=r.value;sv(dk,day)};r.onchange=stats}
   const T=el.querySelector(".times");
   t[1].forEach(tm=>{const w=document.createElement("span");w.className="tm";w.textContent="⏰ "+tm.replace(/\d/g,d=>fa(d));T.appendChild(w)});
   L.appendChild(el)});
- if(day.e)L.innerHTML='<div class="card">🚨 روز ضروری ثبت شد. همه‌ی کارهای امروز کنسل است.</div>';
+ if(!tasks.length)L.innerHTML='<div class="card pc">هنوز کاری نداری. با دکمه‌ی + بالای صفحه یک کار اضافه کن.</div>';
+ if(day.e)L.innerHTML='<div class="card">🚨 PROTOCOL ZERO ثبت شد. همه‌ی کارهای امروز کنسل است.</div>';
  stats();
 }
 function pick(i,v){if(day.s[i]===v)delete day.s[i];else day.s[i]=v;sv(dk,day);render()}
-async function sched(){
+async function sched(){const D0=TD();
  if(!LN){$("msg").textContent="الارم فقط داخل اپ اندروید کار می‌کند.";return}
  const AP=getAP();
  try{
@@ -154,16 +283,15 @@ async function sched(){
   await LN.createChannel({id:"alarms",name:"الارم کارها",importance:5,visibility:1,vibration:true});
   const q=await LN.getPending();if(q.notifications.length)await LN.cancel({notifications:q.notifications});
   const list=[];
-  tasks.forEach((t,i)=>{if(day.e)return;if(day.l&&!LIGHT.includes(i))return;t[1].forEach((tm,j)=>{if(i===0&&tm==="06:00")return;const [h,m]=tm.split(":").map(Number);
-   const WD=i===9?[2,3,4,5,6]:i===14?[7,1]:null;(WD||[0]).forEach(wd=>list.push({id:wd?1000+i*100+j*10+wd:i*10+j+1,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{on:wd?{weekday:wd,hour:h,minute:m}:{hour:h,minute:m},allowWhileIdle:true}}))})});
-  if(day.e)for(let k=1;k<=3;k++)tasks.forEach((t,i)=>t[1].forEach((tm,j)=>{if(i===0&&tm==="06:00")return;const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,...tm.split(":").map(Number),0),g=d.getDay();
-   if((i===9&&(g===6||g===0))||(i===14&&g>=1&&g<=5))return;
+  tasks.forEach((t,i)=>{if(D0.e)return;if(D0.l&&!LIGHT().includes(t[2]))return;t[1].forEach((tm,j)=>{const [h,m]=tm.split(":").map(Number);list.push({id:i*10+j+1,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{on:{hour:h,minute:m},allowWhileIdle:true}})})});
+  if(D0.e)for(let k=1;k<=3;k++)tasks.forEach((t,i)=>t[1].forEach((tm,j)=>{const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,...tm.split(":").map(Number),0),g=d.getDay();
    list.push({id:3000+k*100+i*3+j,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{at:d,allowWhileIdle:true}})}));
-  for(let k=0;k<30;k++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,6,0,0);if(d<=new Date()||(k===0&&day.e))continue;
-   list.push({id:9100+k,title:tasks[0][0],body:Q[qi(d)],channelId:"alarms",schedule:{at:d,allowWhileIdle:true}})}
+  for(let k=0;k<30;k++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,6,0,0);if(d<=new Date()||(k===0&&D0.e))continue;
+   list.push({id:9100+k,title:"💬 پیام امروز",body:Q[qi(d)],channelId:"alarms",schedule:{at:d,allowWhileIdle:true}})}
   const n=list.length;
   const nightly=[{id:9000,title:"لیست امروز را پر کردی؟",body:"Yes/No کارهای امروز را ثبت کن تا زنجیره‌ات نشکند.",channelId:"alarms",schedule:{on:{hour:22,minute:0},allowWhileIdle:true}},
-   {id:9001,title:"یادداشت شبانه",body:"امروز چی یاد گرفتی؟ دو خط بنویس.",channelId:"alarms",schedule:{on:{hour:23,minute:30},allowWhileIdle:true}}];
+   {id:9001,title:"یادداشت شبانه",body:"امروز چی یاد گرفتی؟ دو خط بنویس.",channelId:"alarms",schedule:{on:{hour:23,minute:30},allowWhileIdle:true}},
+   {id:9002,title:"مرور هفته",body:"ببین این هفته کدام مانع‌ها تکرار شدند؟",channelId:"alarms",schedule:{on:{weekday:7,hour:9,minute:0},allowWhileIdle:true}}];
   if(AP){
    await AP.setAlarms({alarms:list.map(x=>({id:x.id,title:x.title,body:x.body,hour:x.schedule.on?x.schedule.on.hour:0,minute:x.schedule.on?x.schedule.on.minute:0,weekdays:(x.schedule.on&&x.schedule.on.weekday)?[x.schedule.on.weekday]:[],at:x.schedule.at?x.schedule.at.getTime():0}))});
    await LN.schedule({notifications:nightly});
@@ -182,9 +310,9 @@ const svT=()=>sv("todos",todos),sod=d=>new Date(d.getFullYear(),d.getMonth(),d.g
 todos=todos.filter(t=>!t.done||sod(new Date(t.dt))===sod(now));
 function renderT(){
  const L=$("tl");L.innerHTML="";const open=todos.filter(t=>!t.done);
- $("tab2").textContent="کارهای من"+(open.length?" ("+fa(open.length)+")":"");
+ $("tab2").textContent="کارهای من"+(open.length?" ("+fa(open.length)+")":"");$("sb2").dataset.n=open.length?fa(open.length):"";
  if(!open.length)L.innerHTML='<div class="card pc">کاری باز نیست. یه کار اضافه کن.</div>';
- open.forEach(t=>{const el=document.createElement("div");el.className="item";
+ open.filter(t=>!SQ||t.t.includes(SQ)).forEach(t=>{const el=document.createElement("div");el.className="item";
   el.innerHTML='<div class="top"><div class="t"></div><div class="ch"><button class="y">Yes</button><button class="x">✕</button></div></div>';
   el.querySelector(".t").textContent=t.t;
   const days=Math.round((sod(now)-sod(new Date(t.c)))/864e5);
@@ -204,24 +332,265 @@ function renderT(){
 }
 $("ta").onclick=()=>{const v=$("ti").value.trim();if(!v)return;todos.unshift({t:v,c:Date.now(),done:false});svT();$("ti").value="";renderT()};
 $("ti").onkeydown=e=>{if(e.key==="Enter")$("ta").onclick()};
-function tab(n){$("v1").style.display=n===1?"":"none";$("v2").style.display=n===2?"":"none";$("tab1").classList.toggle("on",n===1);$("tab2").classList.toggle("on",n===2)}
+function tab(n){$("v1").style.display=n===1?"":"none";$("v2").style.display=n===2?"":"none";$("tab1").classList.toggle("on",n===1);$("tab2").classList.toggle("on",n===2);$("sb1").classList.toggle("on",n===1);$("sb2").classList.toggle("on",n===2)}
 $("tab1").onclick=()=>tab(1);$("tab2").onclick=()=>tab(2);
 renderT();
-$("wk").onclick=()=>{day.w=!isW(day);sv(dk,day);render();sched()};
+const WDN=[["شنبه و یکشنبه",[6,0]],["پنجشنبه و جمعه",[4,5]]];
+function wmRender(){
+ $("wmd").textContent="WEEKEND MODE برای روزهایی است که برنامه‌ات با روزهای عادی فرق دارد. هر روزی که پایین انتخاب کنی خودکار در این حالت ثبت می‌شود و دکمه‌اش در منو روشن می‌شود.";
+ const L=$("wml");L.innerHTML="";
+ WDN.forEach(a=>{const l=document.createElement("label");l.className="ck";const c=document.createElement("input");c.type="checkbox";c.checked=a[1].every(d=>wdays.includes(d));
+  c.onchange=()=>{wdays=wdays.filter(x=>!a[1].includes(x));if(c.checked)wdays=wdays.concat(a[1]);sv("wdays",wdays);render();wmRender()};
+  const sp=document.createElement("span");sp.textContent=a[0];l.append(c,sp);L.appendChild(l)});
+}
+$("wk").onclick=()=>{$("mn").style.display="none";wmRender();$("wm").style.display="flex"};
+$("wmx").onclick=()=>{$("wm").style.display="none"};
 let ovCb=null;
 function showOv(t,p,cb){$("ovt").textContent=t;$("ovp").textContent=p;ovCb=cb;$("ovn").style.display=cb?"":"none";$("ovy").textContent=cb?"تأیید":"باشه";$("ov").style.display="flex"}
 $("ovy").onclick=()=>{$("ov").style.display="none";const c=ovCb;ovCb=null;if(c)c()};
 $("ovn").onclick=()=>{$("ov").style.display="none";ovCb=null};
 function toggleMode(f,lim,name,note){
+ if(dk!==TK){showOv("فقط برای امروز","این حالت فقط روی امروز فعال می‌شود؛ اول روی امروز برگرد.");return}
  if(day[f]){day[f]=false;sv(dk,day);render();sched();return}
  const u=usedCount(f);
  if(u>=lim){showOv("حق استفاده نداری","این ماه "+fa(lim)+" بار از «"+name+"» استفاده کردی. حق استفاده از این گزینه را ندارد.");return}
  showOv("مطمئنی؟","این ماه "+fa(lim-u)+" بار برای «"+name+"» باقی مانده. "+note,()=>{day[f]=true;sv(dk,day);render();sched()});
 }
-$("lt").onclick=()=>toggleMode("l",LIM_L,"روز سبک","فقط ۵ کار اصلی می‌ماند.");
-$("em").onclick=()=>toggleMode("e",LIM_E,"روز ضروری","همه‌ی کارهای امروز کنسل می‌شود.");
+$("lt").onclick=()=>toggleMode("l",LIM_L,"STEADY","فقط ۵ کار اول می‌ماند.");
+$("em").onclick=()=>toggleMode("e",LIM_E,"PROTOCOL ZERO","همه‌ی کارهای امروز کنسل می‌شود.");
 const nb=$("note");nb.value=day.n||"";nb.oninput=()=>{day.n=nb.value;sv(dk,day)};nb.onchange=stats;
 function noteVis(){const t=new Date();$("notecard").style.display=(t.getHours()*60+t.getMinutes()>=23*60+30)?"":"none"}
 noteVis();setInterval(noteVis,60000);
-render();sched();
+let tpCb=null,tpH=8,tpM=0,tpMode="h";
+const p2=n=>String(n).padStart(2,"0"),pos=(a,r)=>[130+r*Math.sin(a*Math.PI/180),130-r*Math.cos(a*Math.PI/180)];
+function tpOpen(v,cb){const a=v.split(":").map(Number);tpH=a[0];tpM=a[1];tpMode="h";tpCb=cb;$("tp").style.display="flex";tpDraw()}
+function tpDraw(){
+ const D=$("dial");D.innerHTML="";
+ $("tph").className=tpMode==="h"?"on":"";$("tpm").className=tpMode==="m"?"on":"";$("tph").textContent=p2(tpH);$("tpm").textContent=p2(tpM);
+ const add=(t,x,y,sel,inn)=>{const e=document.createElement("div");e.className="dn2"+(sel?" sel":"")+(inn?" in":"");e.textContent=t;e.style.left=(x-18)+"px";e.style.top=(y-18)+"px";D.appendChild(e)};
+ let ang,rad;
+ if(tpMode==="h"){const inn=tpH===0||tpH>12;ang=(tpH%12)*30;rad=inn?68:105}else{ang=tpM*6;rad=105}
+ const hd=document.createElement("div");hd.className="hand";hd.style.height=rad+"px";hd.style.top=(130-rad)+"px";hd.style.transform="rotate("+ang+"deg)";D.appendChild(hd);
+ const c=document.createElement("div");c.className="cdot";D.appendChild(c);
+ if(tpMode==="h"){for(let k=1;k<=12;k++){let q=pos(k*30,105);add(k,q[0],q[1],tpH===k,false);const v=k===12?0:k+12;q=pos(k*30,68);add(p2(v),q[0],q[1],tpH===v,true)}}
+ else{for(let k=0;k<12;k++){const q=pos(k*30,105);add(p2(k*5),q[0],q[1],tpM===k*5,false)}
+  if(tpM%5){const q=pos(ang,105),d=document.createElement("div");d.className="dot2";d.style.left=(q[0]-5)+"px";d.style.top=(q[1]-5)+"px";D.appendChild(d)}}
+}
+(function(){const D=$("dial");let down=false;
+ const hit=e=>{const r=D.getBoundingClientRect(),x=e.clientX-r.left-130,y=e.clientY-r.top-130,a=(Math.atan2(x,-y)*180/Math.PI+360)%360,d=Math.hypot(x,y);
+  if(tpMode==="h"){const n=Math.round(a/30)%12;tpH=d<86?(n===0?0:n+12):(n===0?12:n)}else tpM=Math.round(a/6)%60;tpDraw()};
+ D.onpointerdown=e=>{down=true;try{D.setPointerCapture(e.pointerId)}catch(_){}hit(e)};
+ D.onpointermove=e=>{if(down)hit(e)};
+ D.onpointerup=()=>{if(!down)return;down=false;if(tpMode==="h"){tpMode="m";tpDraw()}};
+ $("tph").onclick=()=>{tpMode="h";tpDraw()};$("tpm").onclick=()=>{tpMode="m";tpDraw()};
+ $("tpx").onclick=()=>{$("tp").style.display="none";tpCb=null};
+ $("tpok").onclick=()=>{$("tp").style.display="none";const c=tpCb;tpCb=null;if(c)c(p2(tpH)+":"+p2(tpM))};
+})();
+let nt=["08:00"];
+function renderTimes(arr,A,again){A.innerHTML="";arr.forEach((tm,j)=>{const w=document.createElement("span");w.className="tm";w.innerHTML='<button class="tbtn">'+tm+'</button><b>×</b>';w.querySelector("button").onclick=()=>tpOpen(arr[j],v=>{arr[j]=v;again()});w.querySelector("b").onclick=()=>{arr.splice(j,1);again()};A.appendChild(w)});if(arr.length<9){const a=document.createElement("button");a.className="add";a.textContent="+ ساعت";a.onclick=()=>{arr.push("08:00");again()};A.appendChild(a)}}
+function renderNT(){renderTimes(nt,$("at"),renderNT)}
+$("plus").onclick=()=>{tab(1);const f=$("addc");const open=f.style.display==="none";f.style.display=open?"":"none";if(open){nt=["08:00"];$("an").value="";nc=null;renderCat($("catp"),()=>nc,v=>nc=v);renderNT();$("an").focus()}};
+$("ac").onclick=()=>{$("addc").style.display="none"};
+$("as").onclick=()=>{const n=$("an").value.trim();if(!n)return;if(!nc){showOv("دسته را انتخاب کن","این کار در کدام دسته باشد؟ (کار، سلامت یا یادگیری)");return}const id=tasks.reduce((m,t)=>Math.max(m,t[2]),99)+1;tasks.push([n,nt.filter(Boolean),id,nc]);saveTasks();$("addc").style.display="none";render()};
+let dragging=false;
+document.addEventListener("touchmove",e=>{if(dragging&&e.cancelable)e.preventDefault()},{passive:false});
+function attachDrag(el,t,cards){
+ el.oncontextmenu=e=>e.preventDefault();
+ el.addEventListener("pointerdown",e=>{
+  if(e.target.closest("button,input,textarea"))return;
+  const sy=e.clientY,sx=e.clientX,idx=cards.findIndex(c=>c.el===el);
+  let active=false,target=idx,rects=null,moved=false;
+  const mouse=e.pointerType==="mouse";if(mouse&&e.button!==0)return;
+  const begin=()=>{active=true;dragging=true;el.classList.add("dragging");rects=cards.map(c=>c.el.getBoundingClientRect());try{navigator.vibrate&&navigator.vibrate(25)}catch(_){}};
+  const tm=mouse?0:setTimeout(begin,350);
+  const cleanup=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);removeEventListener("pointercancel",up)};
+  const mv=ev=>{
+   const dy=ev.clientY-sy;
+   if(!active){if(mouse){if(Math.abs(dy)>5||Math.abs(ev.clientX-sx)>5)begin();else return}else{if(Math.abs(dy)>10||Math.abs(ev.clientX-sx)>10){clearTimeout(tm);moved=true;cleanup()}return}}
+   el.style.transform="translateY("+dy+"px)";
+   const mid=rects[idx].top+rects[idx].height/2+dy;
+   let n=0;cards.forEach((c,k)=>{if(k!==idx&&rects[k].top+rects[k].height/2<mid)n++});target=n;
+   const sh=rects[idx].height+10;
+   cards.forEach((c,k)=>{if(k===idx)return;let y=0;if(idx<target&&k>idx&&k<=target)y=-sh;else if(idx>target&&k>=target&&k<idx)y=sh;c.el.style.transform=y?"translateY("+y+"px)":""})
+  };
+  const up=ev=>{
+   clearTimeout(tm);cleanup();
+   if(active){dragging=false;cards.forEach(c=>c.el.style.transform="");
+    if(target!==idx){const V=cards.map(c=>c.t),slots=V.map(v=>tasks.indexOf(v)),nv=V.slice();nv.splice(idx,1);nv.splice(target,0,t);slots.forEach((sl,k)=>{tasks[sl]=nv[k]});saveTasks()}
+    render()}
+   else if(!moved&&ev.type==="pointerup")edOpen(tasks.indexOf(t))
+  };
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);addEventListener("pointercancel",up)
+ })
+}
+let eI=-1,en=[];
+function renderET(){renderTimes(en,$("et"),renderET)}
+function edOpen(i){eI=i;ec=cat(tasks[i]);renderCat($("catpe"),()=>ec,v=>ec=v);en=tasks[i][1].slice();$("en").value=tasks[i][0];renderET();$("ed").style.display="flex"}
+$("ex").onclick=()=>{$("ed").style.display="none"};
+$("esv").onclick=()=>{const n=$("en").value.trim();if(!n)return;tasks[eI][0]=n;tasks[eI][1]=en.filter(Boolean);tasks[eI][3]=ec;saveTasks();$("ed").style.display="none";render()};
+$("edel").onclick=()=>showOv("حذف کار","«"+tasks[eI][0]+"» حذف شود؟",()=>{tasks.splice(eI,1);saveTasks();$("ed").style.display="none";render()});
+$("pencil").onclick=()=>{tab(1);editMode=!editMode;$("pencil").classList.toggle("on",editMode);render()};
+function stRender(){
+ const L=$("stl");L.innerHTML="";const cur=LIGHT();
+ $("stc").textContent=fa(cur.length)+" کار از "+fa(tasks.length)+" کار انتخاب شده";
+ tasks.forEach(t=>{const l=document.createElement("label");l.className="ck";const c=document.createElement("input");c.type="checkbox";c.checked=cur.includes(t[2]);
+  c.onchange=()=>{const set=new Set(LIGHT());if(c.checked)set.add(t[2]);else set.delete(t[2]);steady=tasks.filter(x=>set.has(x[2])).map(x=>x[2]);sv("steady",steady);stRender();render();if(day.l)sched()};
+  const sp=document.createElement("span");sp.textContent=t[0];l.append(c,sp);L.appendChild(l)});
+ if(!tasks.length)L.innerHTML='<div class="pc">هنوز کاری نداری؛ اول با + کار اضافه کن.</div>';
+}
+$("menu").onclick=()=>{$("mn").style.display="block"};
+$("mn").onclick=e=>{if(e.target===$("mn"))$("mn").style.display="none"};
+$("mst").onclick=()=>{$("mn").style.display="none";$("std").textContent="STEADY برای روزهای پرفشار است: وقتی روشنش کنی، فقط کارهایی که اینجا انتخاب می‌کنی در آن روز می‌مانند و بقیه از لیست، آمار و الارم همان روز کنار می‌روند تا زنجیره‌ات نشکند. ماهی ۳ بار می‌شود از آن استفاده کرد.";stRender();$("st").style.display="flex"};
+function openWhy(){
+ const B=$("wyb");B.innerHTML="";const rs={},ts={},tr={};
+ for(let k=0;k<7;k++){const r=rec(k);if(!r||r.e)continue;
+  Object.keys(r.s).forEach(i=>{if(r.s[i]!=="x"||!T(i))return;
+   const nm=T(i)[0];ts[nm]=(ts[nm]||0)+1;{const t0=(r.r[i]||"").trim(),tk=(tr[nm]=tr[nm]||{}),kk=t0.replace(/\s+/g," ").toLowerCase();(tk[kk]=tk[kk]||{t:t0,n:0}).n++}
+   const tx=(r.r[i]||"").trim();if(tx){const key=tx.replace(/\s+/g," ").toLowerCase();(rs[key]=rs[key]||{t:tx,n:0}).n++}})}
+ const sec=(title,arr,empty)=>{const h=document.createElement("h2");h.style.marginTop="14px";h.textContent=title;B.appendChild(h);
+  if(!arr.length){const e=document.createElement("div");e.className="pc";e.textContent=empty;B.appendChild(e);return}
+  const mx=arr[0][1];
+  arr.forEach(a=>{const row=document.createElement("div");row.className="cr";const x=document.createElement("span");x.textContent=a[0];const c=document.createElement("b");c.textContent=fa(a[1])+" بار"+(a[2]?" ⌄":"");row.append(x,c);
+   const bar=document.createElement("div");bar.className="cb";bar.style.width=Math.max(a[1]/mx*100,8)+"%";B.append(row,bar);
+   if(a[2]){row.style.cursor="pointer";const d=document.createElement("div");d.className="cd";d.style.display="none";a[2].forEach(q=>{const l=document.createElement("div");l.textContent="• "+q[0]+(q[1]>1?" ("+fa(q[1])+" بار)":"");d.appendChild(l)});B.appendChild(d);row.onclick=()=>{const o=d.style.display==="none";d.style.display=o?"block":"none";c.textContent=fa(a[1])+" بار"+(o?" ⌃":" ⌄")}}})};
+ sec("کارهایی که جا ماندند",Object.entries(ts).sort((a,b)=>b[1]-a[1]).map(e=>[e[0],e[1],Object.values(tr[e[0]]).sort((a,b)=>b.n-a.n).map(v=>[v.t||"بدون توضیح",v.n])]),"هنوز کاری جا نمانده.");
+ $("wy").style.display="flex"}
+$("skb").onclick=openWhy;$("wyx").onclick=()=>{$("wy").style.display="none"};
+function openReasons(){$("mn").style.display="none";$("st2").style.display="flex"}
+
+try{if(LN)LN.addListener("localNotificationActionPerformed",a=>{if(a.notification&&a.notification.id===9002)openReasons()})}catch(_){}
+$("rsx").onclick=()=>{$("st2").style.display="none"};
+$("stx").onclick=()=>{$("st").style.display="none"};
+
+function renderCat(el,get,set){el.innerHTML="";CATS.forEach(c=>{const b=document.createElement("button");b.type="button";b.className="lt"+(get()===c?" on":"");b.textContent=c;b.onclick=()=>{set(c);renderCat(el,get,set)};el.appendChild(b)})}
+let wo=0,SD=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+const fmt=(o,d)=>new Intl.DateTimeFormat("fa-IR-u-ca-persian",o).format(d),addD=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const wkStart=w=>addD(now,-((now.getDay()+1)%7)+w*7);
+function selDay(d){SD=d;dk=key(d);day=ld(dk,{s:{},r:{}});day.s=day.s||{};day.r=day.r||{};nb.value=day.n||"";
+ $("day").textContent=fmt({weekday:"long",year:"numeric",month:"long",day:"numeric"},d)+(dk===TK?"":" (روز انتخابی)");render()}
+function wkShift(n){wo+=n;selDay(addD(SD,7*n))}
+function drawWeek(){
+ $("gt").style.display=(wo!==0||dk!==TK)?"":"none";
+ const st=wkStart(wo);$("ttl").textContent=fmt({month:"long",year:"numeric"},addD(st,3));const D=$("days");D.innerHTML="";
+ for(let j=0;j<7;j++){const d=addD(st,j),k=key(d),r=ld(k,null),b=document.createElement("button");
+  b.className="d"+(k===dk?" sel":"")+(k===TK?" now":"");
+  const q=r&&r.e?"e":r&&r.s&&Object.keys(r.s).length?(pct(r,0)>=70?"g":pct(r,0)>=40?"m":"r"):"";
+  b.innerHTML="<span>"+fmt({weekday:"long"},d)+"</span><b>"+fmt({day:"numeric"},d)+'</b><i class="dd '+q+'"></i>';b.onclick=()=>selDay(d);D.appendChild(b)}}
+function wkStats(w){const st=wkStart(w),o={_n:0};CATS.forEach(c=>o[c]={y:0,t:0,days:[]});
+ for(let j=0;j<7;j++){const r=ld(key(addD(st,j)),null);if(!r||r.e||!r.s||!Object.keys(r.s).length)continue;o._n++;
+  CATS.forEach(c=>{const ids=vis(r,0).filter(i=>T(i)&&cat(T(i))===c);if(!ids.length)return;const y=ids.filter(i=>r.s[i]==="y").length;o[c].y+=y;o[c].t+=ids.length;o[c].days.push(y/ids.length*100)})}
+ CATS.forEach(c=>o[c].p=o[c].t?o[c].y/o[c].t*100:null);return o}
+function drawCandles(){
+ const A=wkStats(wo),B=wkStats(wo-1),has=CATS.filter(c=>A[c].p!==null).sort((x,y)=>A[y].p-A[x].p),best=has[0];
+ $("chips").innerHTML="";CATS.forEach(c=>{const b=document.createElement("button");b.className=CF===c?"on":"";b.textContent=(c===best&&has.length>1?"🏆 ":"")+c;b.onclick=()=>{CF=CF===c?null:c;render()};$("chips").appendChild(b)});
+ const W=340,H=176,pt=12,pb=128,st=(W-28)/3,y=v=>pb-v/100*(pb-pt),col=p=>p>75?"#2bf59b":p>=50?"#ffb02e":"#ff6b5e";
+ let g="";[0,50,75].forEach(v=>{g+='<line x1="30" x2="'+W+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#8fa89b" stroke-opacity="'+(v?.35:.6)+'" stroke-dasharray="3 4"/><text x="2" y="'+(y(v)+3)+'" fill="#8fa89b" font-size="9">'+fa(v)+'٪</text>'});
+ CATS.forEach((c,i)=>{const x=34+(i+.5)*(st-6),cur=A[c].p,prev=B[c].p;
+  g+='<text x="'+x+'" y="'+(H-24)+'" fill="#e9f6ef" font-size="12" text-anchor="middle">'+c+'</text>';
+  if(cur===null){g+='<text x="'+x+'" y="'+(H-8)+'" fill="#8fa89b" font-size="11" text-anchor="middle">بدون داده</text>';return}
+  const dy=A[c].days,op=prev===null?dy[0]:prev,cs=cur,hi=Math.max(op,cs,...dy),lo=Math.min(op,cs,...dy),cl=col(cur),d=Math.round(cur-(prev===null?cur:prev)),bt=y(Math.max(op,cs)),bh=Math.max(Math.abs(y(op)-y(cs)),3);
+  g+='<line x1="'+x+'" x2="'+x+'" y1="'+y(hi)+'" y2="'+y(lo)+'" stroke="'+cl+'" stroke-width="1.8" stroke-linecap="round"/><line x1="'+(x-5)+'" x2="'+(x+5)+'" y1="'+y(hi)+'" y2="'+y(hi)+'" stroke="'+cl+'" stroke-width="1.8"/><line x1="'+(x-5)+'" x2="'+(x+5)+'" y1="'+y(lo)+'" y2="'+y(lo)+'" stroke="'+cl+'" stroke-width="1.8"/><rect x="'+(x-14)+'" y="'+bt+'" width="28" height="'+bh+'" rx="2" fill="'+cl+'" fill-opacity="1" stroke="'+cl+'" stroke-width="2"/>';
+  g+='<text x="'+x+'" y="'+(H-8)+'" fill="'+cl+'" font-size="11" font-weight="bold" text-anchor="middle">'+fa(Math.round(cur))+'٪'+(prev===null?"":d>0?" ▲"+fa(d):d<0?" ▼"+fa(-d):" ＝")+'</text>'});
+ $("cdl").innerHTML=g;const s0=wkStart(wo);
+ $("cdr").textContent="از تاریخ "+fmt({year:"numeric",month:"long",day:"numeric"},s0)+" تا "+fmt({year:"numeric",month:"long",day:"numeric"},addD(s0,6));
+}
+function extra(){
+ const p=pct(day,0),a=$("arc");a.style.strokeDashoffset=364.4*(1-p/100);a.style.stroke=p>=70?"var(--yes)":"var(--warn)";$("rn").textContent=fa(p)+"٪";
+ const RS=[];for(let k=0;k<400;k++)RS[k]=rec(k);
+ let sc=0;RS.forEach(r=>{if(r&&!r.e)sc+=Object.keys(r.s).filter(i=>r.s[i]==="y"&&T(i)).length});$("sc").textContent=fa(sc*20);drawWeek();drawCandles();
+ const V=vis(day,0),left=V.map(T).filter(t=>t&&!day.s[t[2]]),f=t=>t[1].slice().sort()[0]||"99:99",h=new Date(),cur=p2(h.getHours())+":"+p2(h.getMinutes());
+ left.sort((x,y)=>f(x).localeCompare(f(y)));const nx=left.find(t=>f(t)>=cur)||left[0];
+ $("ai").textContent=dk!==TK?(!V.length?"برای این روز کاری نیست.":!left.length?"همه‌ی کارهای این روز ثبت شده.":fa(left.length)+" کار این روز بدون جواب مانده است."):day.e?"PROTOCOL ZERO فعال است؛ امروز استراحت کن و فردا از نو شروع کن.":!V.length?"هنوز کاری نداری؛ با + بالای صفحه یکی اضافه کن.":!left.length?"همه‌ی کارهای امروز ثبت شد. دمت گرم!":"کار بعدی: «"+nx[0]+"»"+(nx[1].length?" ⏰ "+f(nx).replace(/\d/g,d=>fa(d)):"")+" · "+fa(left.length)+" کار مانده";
+ const hr=h.getHours(),ph=hr<5?["شب بخیر","🌙"]:hr<12?["صبح بخیر","🌅"]:hr<16?["ظهر بخیر","☀️"]:hr<19?["عصر بخیر","🌇"]:["شب بخیر","🌙"];
+ const td=TD(),lt=vis(td,0).map(T).filter(t=>t&&!td.s[t[2]]),n=td.e?0:lt.length;$("bb").textContent=n?fa(n):"";window._left=lt;
+}
+$("bell").onclick=()=>{const L=window._left||[];showOv("کارهای مانده امروز",TD().e?"PROTOCOL ZERO فعال است.":L.length?L.map(t=>"• "+t[0]+(t[1].length?" ⏰ "+t[1].slice().sort()[0].replace(/\d/g,d=>fa(d)):"")).join("\n"):"همه‌ی کارهای امروز ثبت شده.")};
+$("sq").oninput=e=>{SQ=e.target.value.trim();render();renderT()};
+$("cal").onclick=e=>{const el=e.target.closest("i");const i=[...$("cal").children].indexOf(el);if(i<0)return;const k=29-i,r=rec(k);
+ const dd=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{weekday:"long",month:"long",day:"numeric"}).format(ago(k));
+ if(!r||(!Object.keys(r.s).length&&!r.e&&!r.n)){showOv(dd,"برای این روز چیزی ثبت نشده.");return}
+ if(r.e){showOv(dd,"PROTOCOL ZERO بود؛ همه‌ی کارها کنسل شد.");return}
+ const L=[];Object.keys(r.s).forEach(id=>{const t=T(id);if(!t)return;L.push((r.s[id]==="y"?"✔ ":"✘ ")+t[0]+(r.s[id]==="x"&&(r.r||{})[id]?" — "+r.r[id]:""))});
+ showOv(dd+" · "+fa(pct(r,k))+"٪",L.join("\n")+(r.n?"\n\n📝 "+r.n:""))};
+const th=m=>{document.documentElement.dataset.theme=m;$("tmD").classList.toggle("on",m==="dark");$("tmL").classList.toggle("on",m==="light");sv("theme",m)};
+$("tmD").onclick=()=>th("dark");$("tmL").onclick=()=>th("light");
+th(ld("theme",matchMedia("(prefers-color-scheme:light)").matches?"light":"dark"));
+$("goal").value=ld("goal","");$("goal").oninput=()=>sv("goal",$("goal").value);
+setInterval(extra,60000);
+$("sb1").onclick=()=>tab(1);$("sb2").onclick=()=>tab(2);$("sb3").onclick=()=>$("skb").click();
+$("gt").onclick=()=>{wo=0;selDay(new Date(now.getFullYear(),now.getMonth(),now.getDate()))};
+$("wpv").onclick=$("cwp").onclick=()=>wkShift(-1);$("wnx").onclick=$("cwn").onclick=()=>wkShift(1);
+(function(){const v=$("v1"),M=document.createElement("div"),S=document.createElement("div");M.className="colM";S.className="colS";
+ ["weekc","addc","list","notecard","notescard","msg"].forEach(i=>M.appendChild($(i)));["quotec","todayc","ringc","scorec","goalc","calc"].forEach(i=>S.appendChild($(i)));v.append(M,S);
+ $("snav").prepend($("menu"),$("lt"),$("em"),$("pencil"))})();
+
+function openIns(){
+ window._mr=null;
+ $("mn").style.display="none";const B=$("insb");B.innerHTML="";
+ const days=[];for(let k=0;k<365;k++){const r=rec(k);if(r&&!r.e&&r.s&&Object.keys(r.s).length)days.push({k,r,p:pct(r,k),d:ago(k)})}
+ if(!days.length){B.innerHTML='<div class="pc">هنوز روزی ثبت نشده. بعد از چند روز Yes/No زدن، آمار اینجا ظاهر می‌شود.</div>';$("ins").style.display="flex";return}
+ const avg=a=>a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0;
+ let best=0,run=0;for(let k=364;k>=0;k--){const r=rec(k);if(r&&r.e)continue;if(r&&r.s&&Object.keys(r.s).length&&pct(r,k)>=70){run++;best=Math.max(best,run)}else run=0}
+ const el=(h)=>{const d=document.createElement("div");d.innerHTML=h;return d};
+ B.appendChild(el('<div class="kp"><div><b>'+fa(days.length)+'</b>روز ثبت‌شده</div><div><b>'+fa(avg(days.map(x=>x.p)))+'٪</b>میانگین کل</div><div><b>'+fa(best)+'</b>بلندترین زنجیره</div></div>'));
+ const mo={};days.forEach(x=>{const m=fmt({year:"numeric",month:"long"},x.d);(mo[m]=mo[m]||{p:[],t:x.d.getTime()}).p.push(x.p)});
+ const ms=Object.entries(mo).sort((a,b)=>b[1].t-a[1].t).slice(0,6);
+ B.appendChild(el('<h3 class="insh">میانگین هر ماه</h3>'));
+ ms.forEach(([m,v])=>{const a=avg(v.p);B.appendChild(el('<div class="mb"><span>'+m+'</span><i style="width:'+Math.max(a*.55,3)+'%"></i><em>'+fa(a)+'٪</em></div>'))});
+ const wd=[[],[],[],[],[],[],[]];days.forEach(x=>wd[x.d.getDay()].push(x.p));
+ const names=[];for(let j=0;j<7;j++){const d=addD(wkStart(0),j);names[d.getDay()]=fmt({weekday:"long"},d)}
+ const wr=wd.map((a,i)=>({n:names[i],c:a.length,a:avg(a)})).filter(x=>x.c>=2).sort((a,b)=>b.a-a.a);
+ B.appendChild(el('<h3 class="insh">روزهای هفته</h3>'));
+ if(wr.length>1){B.appendChild(el('<div class="pc">قوی‌ترین: <b>'+wr[0].n+'</b> ('+fa(wr[0].a)+'٪) · ضعیف‌ترین: <b>'+wr[wr.length-1].n+'</b> ('+fa(wr[wr.length-1].a)+'٪)</div>'));
+  wr.forEach(x=>B.appendChild(el('<div class="mb"><span>'+x.n+'</span><i style="width:'+Math.max(x.a*.55,3)+'%"></i><em>'+fa(x.a)+'٪</em></div>')))}
+ else B.appendChild(el('<div class="pc">برای مقایسه‌ی روزها حداقل دو هفته داده لازم است.</div>'));
+ const ct={};CATS.forEach(c=>ct[c]={y:0,t:0});
+ days.filter(x=>x.k<30).forEach(x=>vis(x.r,x.k).forEach(i=>{const t=T(i);if(!t)return;const c=cat(t);ct[c].t++;if(x.r.s[i]==="y")ct[c].y++}));
+ B.appendChild(el('<h3 class="insh">حوزه‌ها در ۳۰ روز اخیر</h3>'));
+ CATS.forEach(c=>{const a=ct[c].t?Math.round(ct[c].y/ct[c].t*100):null;B.appendChild(el('<div class="mb"><span>'+c+'</span><i style="width:'+(a===null?0:Math.max(a*.55,3))+'%"></i><em>'+(a===null?"بدون داده":fa(a)+"٪")+'</em></div>'))});
+ const MK=ym(now),mk=+new Intl.DateTimeFormat("fa-IR-u-ca-persian-nu-latn",{day:"numeric"}).format(now)-1,done=ld("rsDone",{});
+ const tl=q=>Object.entries(q.k).sort((a,b)=>b[1]-a[1]).map(e=>e[0]+(e[1]>1?" ("+fa(e[1])+")":"")).join("، ");const rs={};days.filter(x=>x.k<=mk).forEach(x=>Object.keys(x.r.s).forEach(i=>{if(x.r.s[i]!=="x"||!T(i))return;const tx=((x.r.r||{})[i]||"").trim();if(!tx)return;const kk=tx.replace(/\s+/g," ").toLowerCase();{const q=(rs[kk]=rs[kk]||{t:tx,n:0,k:{}}),nm=T(i)[0];q.n++;q.k[nm]=(q.k[nm]||0)+1}}));
+ const rl=Object.values(rs).sort((a,b)=>b.n-a.n).slice(0,5);
+ B.appendChild(el('<h3 class="insh">بهانه‌های پرتکرار این ماه</h3>'));
+ if(done[MK])B.appendChild(el('<div class="pc">بهانه‌های این ماه بررسی شد و پاک شد. از اول ماه بعد دوباره جمع می‌شوند.</div>'));
+ else if(rl.length){window._mr=rl.map(x=>x.t+" ← "+tl(x));const mx=rl[0].n;rl.forEach(x=>{const d=el('<div class="mb"><span style="width:auto;flex:1"></span><em>'+fa(x.n)+' بار</em></div>');d.querySelector("span").textContent=x.t;B.appendChild(d);B.appendChild(el('<div class="cb" style="width:'+Math.max(x.n/mx*100,8)+'%"></div>'));const f=el('');f.className='pc';f.textContent='برای: '+tl(x);B.appendChild(f)})}
+ else B.appendChild(el('<div class="pc">هنوز دلیلی برای No ثبت نشده.</div>'));
+ $("ins").style.display="flex"}
+$("min").onclick=openIns;$("insx").onclick=()=>{$("ins").style.display="none";setTimeout(askRs,250)};
+function askRs(){if(!window._mr)return;$("rqt").textContent="بهانه‌های این ماه";$("rqp").textContent="آیا بهانه‌های این ماه را چک کردی؟";$("rqy").textContent="بله، چک کردم";$("rqn").style.display="";$("rq").style.display="flex"}
+$("rqn").onclick=()=>{$("rqt").textContent="پس همین حالا بخوانشان";$("rqp").textContent=(window._mr||[]).map(t=>"• "+t).join("\n");$("rqy").textContent="خواندم";$("rqn").style.display="none"};
+$("rqy").onclick=()=>{const d=ld("rsDone",{});d[ym(now)]=true;sv("rsDone",d);window._mr=null;$("rq").style.display="none"};
+$("mbk").onclick=()=>{$("mn").style.display="none";$("bkm").textContent="";$("bk").style.display="flex"};$("bkx").onclick=()=>{$("bk").style.display="none"};
+$("bke").onclick=()=>{try{const o={app:"daily-list",v:1,at:new Date().toISOString(),data:{}};
+ for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o.data[k]=localStorage.getItem(k)}
+ const n=now,nm="لیست-روزانه-"+n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate())+".json",
+ a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:"application/json"}));a.download=nm;document.body.appendChild(a);a.click();a.remove();
+ $("bkm").textContent="فایل پشتیبان ساخته شد: "+Object.keys(o.data).length.toLocaleString("fa-IR")+" مورد ذخیره شد."}catch(e){$("bkm").textContent="ساخت فایل ناموفق بود. دوباره امتحان کن."}};
+$("bki").onclick=()=>$("bkf").click();
+$("bkf").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const r=new FileReader();
+ r.onload=()=>{let o;try{o=JSON.parse(r.result)}catch(_){}
+  if(!o||o.app!=="daily-list"||!o.data||typeof o.data!=="object"){$("bkm").textContent="این فایل پشتیبان این اپ نیست.";return}
+  const n=Object.keys(o.data).length;
+  showOv("بازیابی اطلاعات","با بازیابی، "+fa(n)+" مورد جایگزین اطلاعات فعلی می‌شود و اطلاعات فعلی پاک می‌شود. ادامه بدهم؟",()=>{try{localStorage.clear();Object.entries(o.data).forEach(([k,v])=>localStorage.setItem(k,v));location.reload()}catch(_){$("bkm").textContent="بازیابی ناموفق بود."}})};
+ r.onerror=()=>{$("bkm").textContent="خواندن فایل ناموفق بود."};r.readAsText(f)};
+
+function late(i){const b=dk.slice(4).split("-").map(Number);let n=0;
+ for(let k=1;k<=60;k++){const r=ld(key(new Date(b[0],b[1]-1,b[2]-k)),null);if(!r)break;if(r.e)continue;
+  if(!vis(r,k).some(v=>String(v)===String(i)))continue;if(r.s&&r.s[i]==="x")n++;else break}return n}
+const PEN=()=>ld("pen",["۱۰ دقیقه کار اضافه روی همین کار","۵ دقیقه حرکت کششی یا پیاده‌روی","مبلغ کوچیک برای صندوق خیریه"]);
+function checkLaw(){if(dk!==TK||editMode)return;const asked=ld("lawAsk",{});
+ for(let x=0;x<tasks.length;x++){const t=tasks[x],n=late(t[2]);if(n<3||asked[t[2]]===TK)continue;
+  asked[t[2]]=TK;sv("lawAsk",asked);const P=PEN();
+  $("lwt").textContent="«"+t[0]+"» "+fa(n)+" روز پشت‌سرهم عقب افتاده";
+  $("lwp").textContent="معمولاً مشکل از اندازه‌ی کار است، نه از تنبلی. با این کار چه کنیم؟";
+  $("lwpen").textContent=P.length?"جریمه‌ی امروزت: "+P[(Math.floor(Date.now()/864e5)+x)%P.length]:"";
+  $("lwpen").style.display=P.length?"":"none";
+  const go=f=>()=>{$("lw").style.display="none";f()};
+  $("lwa").onclick=go(()=>{edOpen(x);$("en").focus()});$("lwb").onclick=go(()=>edOpen(x));
+  $("lwc").onclick=go(()=>{eI=x;$("edel").click()});$("lwd").onclick=go(()=>{});
+  $("lw").style.display="flex";return}}
+$("mpn").onclick=()=>{$("mn").style.display="none";$("pnt").value=PEN().join("\n");$("pn").style.display="flex"};
+$("pns").onclick=()=>{sv("pen",$("pnt").value.split("\n").map(x=>x.trim()).filter(Boolean));$("pn").style.display="none"};
+$("pnx").onclick=()=>{$("pn").style.display="none"};
+render();sched();setTimeout(checkLaw,700);
 </script></body></html>
