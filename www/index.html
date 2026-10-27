@@ -155,20 +155,24 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px soli
 #bkm{font-size:.85rem;margin-top:8px;color:var(--mute);min-height:1.4em}
 .side #lt,.side #em{width:44px;height:44px;padding:0;border-radius:50%;display:grid;place-items:center;line-height:0}
 .col.today span:last-child{font-weight:800;color:var(--ink)}
+.duo{display:flex;gap:14px;align-items:stretch}.duo>.card{flex:1 1 0;min-width:0;margin-bottom:0}.duo .head{flex-wrap:wrap;gap:6px}.duo .rw{width:min(150px,100%)}.duo .rw svg{width:100%;height:auto}.duo .rn{font-size:1.5rem}@media(max-width:340px){.duo{flex-direction:column}}
+.duo #scorec{display:flex;flex-direction:column;justify-content:center;text-align:center}
 </style><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet"></head><body><div class="app"><aside class="side"><nav id="snav"><button class="ic on" id="sb1" aria-label="برنامه روزانه">⌂</button><button class="ic" id="sb2" aria-label="کارهای من">☑</button><button class="ic" id="sb3" aria-label="مانع‌های تکرارشده">📊</button></nav><div class="ic" aria-hidden="true">◐</div></aside><main>
 <div class="tb"><div class="seg"><button id="tmD" aria-label="تم تیره">☾</button><button id="tmL" aria-label="تم روشن">☀</button></div><input id="sq" class="sq" type="search" placeholder="جستجوی کار…"><button class="bell" id="bell" aria-label="کارهای مانده">🔔<b id="bb"></b></button></div>
 <div class="head"><div style="display:flex;align-items:center;gap:10px"><button class="plus alt" id="menu" aria-label="منو">✦</button><h1>لیست انجام وظایف</h1></div><div style="display:flex;gap:8px"><button class="plus alt" id="pencil" aria-label="ویرایش کارها">✏️</button><button class="plus" id="plus" aria-label="افزودن کار">+</button></div></div><div class="sub" id="day"></div>
 <div class="tabs"><button id="tab1" class="on">برنامه روزانه</button><button id="tab2">کارهای من</button></div>
 <div id="v1">
-<div class="quote" id="quotec"><div id="quote"></div><h2 style="margin:16px 0 2px;font-size:1rem">حوزه‌های رشد</h2><div class="sub" style="color:#064d31">روی هر حوزه بزن تا کارها فیلتر شوند</div><div class="chips" id="chips" style="margin-top:10px"></div><div class="cpanel"><div class="cph"><button class="pill" id="cwp">هفته قبل</button><div id="cht">کندل هفتگی</div><button class="pill" id="cwn">هفته بعد</button></div><svg id="cdl" viewBox="0 0 340 176"></svg><div class="cap" id="cdr"></div><div class="cap lg"><i style="background:#2bf59b"></i>بالای ۷۵٪<i style="background:#ffb02e"></i>۵۰ تا ۷۵٪<i style="background:#ff6b5e"></i>زیر ۵۰٪</div></div></div>
+<div class="quote" id="quotec"><div id="quote"></div><h2 style="margin:16px 0 2px;font-size:1rem">حوزه‌های رشد</h2><div class="sub" style="color:#064d31">روی هر حوزه بزن تا کارها فیلتر شوند</div><div class="chips" id="chips" style="margin-top:10px"></div><div class="cpanel"><div class="cph"><button class="pill" id="cwp">هفته قبل</button><div id="cht">کندل هفتگی</div><button class="pill" id="cwn">هفته بعد</button></div><svg id="cdl" viewBox="0 0 340 176"></svg><div class="cap" id="cdr"></div><div class="cap lg"><i style="background:#2bf59b"></i>بالای ۷۵٪<i style="background:#ffb02e"></i>۵۰ تا ۷۵٪<i style="background:#ff6b5e"></i>زیر ۵۰٪ · ┄ هفته قبل</div></div></div>
 <div class="card" id="todayc">
  <div class="head"><h2>امروز</h2><button class="lt" id="lt">STEADY</button><button class="lt" id="em">PROTOCOL ZERO</button><div class="streak" id="streak"></div></div>
  <div class="bar"><i id="fill"></i></div><div class="pc" id="pc"></div>
  <div class="week" id="week"></div>
  <div class="skip" id="skip"><button class="lt" id="skb">📊 کدام مانع‌ها تکرار شدند؟</button></div>
 </div>
+<div class="duo" id="duo">
 <div class="card" id="ringc"><h2>پیشرفت روز انتخابی</h2><div class="rw"><svg width="150" height="150" viewBox="0 0 140 140"><circle cx="70" cy="70" r="58" fill="none" stroke="var(--line)" stroke-width="12"/><circle id="arc" cx="70" cy="70" r="58" fill="none" stroke="var(--warn)" stroke-width="12" stroke-linecap="round" transform="rotate(-90 70 70)" stroke-dasharray="364.4" stroke-dashoffset="364.4" style="transition:stroke-dashoffset .5s"/></svg><div class="rn" id="rn"></div></div><div class="ai" id="ai"></div></div>
 <div class="card" id="scorec"><div class="pc">امتیاز کل</div><div class="big" id="sc"></div><div class="pc">هر Yes ۲۰ امتیاز</div></div>
+</div>
 <div class="card" id="goalc"><h2>هدف من</h2><textarea class="note" id="goal" placeholder="هدف اصلی‌ات را اینجا بنویس…"></textarea></div>
 <div class="card" id="addc" style="display:none"><h2>کار جدید</h2><input id="an" class="reason" placeholder="اسم کار..." style="margin-top:0"><div class="pc" style="margin-top:10px">این کار در کدام دسته باشد؟</div><div class="catp" id="catp"></div><div class="times" id="at"></div><div class="head" style="margin-top:12px"><button class="lt on" id="as">ذخیره</button><button class="lt" id="ac">لغو</button></div></div>
 <div class="card" id="weekc"><div class="wk"><button class="pill" id="wpv">هفته قبل</button><div style="text-align:center"><h2 id="ttl"></h2><button class="pill" id="gt" style="display:none;margin-top:4px;padding:2px 12px;font-size:.75rem">↺ امروز</button></div><button class="pill" id="wnx">هفته بعد</button></div><div class="days" id="days"></div></div>
@@ -206,16 +210,20 @@ const Q=["کار کوچیکِ هر روز، از تصمیم بزرگِ یک رو
 const qi=d=>Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)%30;
 const getAP=()=>{const C=window.Capacitor;if(!C)return null;try{if(C.isNativePlatform&&!C.isNativePlatform())return null;return (C.Plugins&&C.Plugins.DailyAlarm)||(C.registerPlugin?C.registerPlugin("DailyAlarm"):null)}catch(e){return null}};
 const $=id=>document.getElementById(id),LN=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications;
-const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const ld=(k,d)=>{try{const o=JSON.parse(localStorage.getItem(k))||d;if(o&&typeof o==="object"){const m=/^day:(\d+)-(\d+)-(\d+)$/.exec(k);if(m)o.__wd=new Date(+m[1],+m[2]-1,+m[3]).getDay()}return o}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const fa=n=>Number(n).toLocaleString("fa-IR");
 const now=new Date(),key=d=>"day:"+d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),TK=key(now);let dk=TK;
 let editMode=false;let wdays=ld("wdays",[4,5]);steady=ld("steady",null);
-let tasks=ld("tasks",DEF).map((t,i)=>[t[0],t[1],t[2]!==undefined?t[2]:100+i,t[3]]),day=ld(dk,{s:{},r:{}}),tmr;
+const WDN=[["شنبه و یکشنبه",[6,0]],["پنجشنبه و جمعه",[4,5]]];
+let wcfg=[0,1].map(i=>{const c=(ld("wcfg",[])||[])[i];return{hide:(c&&c.hide)||[]}});
+function actG(wd){const gi=WDN.findIndex(g=>g[1].includes(wd));return gi>=0&&wdays.includes(wd)?gi:-1}
+function vis1(t,wd){const a=actG(wd);if(t[4]!=null)return a===t[4];return !(a>=0&&wcfg[a].hide.includes(t[2]))}
+let tasks=ld("tasks",DEF).map((t,i)=>[t[0],t[1],t[2]!==undefined?t[2]:100+i,t[3],t[4]]),day=ld(dk,{s:{},r:{}}),tmr;
 const T=id=>tasks.find(t=>String(t[2])===String(id));
 const ago=k=>{const d=new Date(now);d.setDate(now.getDate()-k);return d};
 const TD=()=>dk===TK?day:ld(TK,{s:{},r:{}});const rec=k=>k===0?TD():ld(key(ago(k)),null);
-const vis=(r,k)=>{if(r.e)return[];if(r.l)return LIGHT();return tasks.map(t=>t[2])};
+const vis=(r,k)=>{if(r.e)return[];const wd=r.__wd!==undefined?r.__wd:ago(k).getDay();return (r.l?LIGHT():tasks.map(t=>t[2])).filter(id=>{const t=T(id);return t&&vis1(t,wd)})};
 const ym=d=>new Intl.DateTimeFormat("fa-IR-u-ca-persian-nu-latn",{year:"numeric",month:"numeric"}).format(d);
 const LIM_L=3,LIM_E=2;
 function usedCount(f){let n=0;const m=ym(now);for(let k=1;k<=31;k++){if(ym(ago(k))!==m)break;const r=rec(k);if(r&&r[f])n++}return n}
@@ -283,8 +291,13 @@ async function sched(){const D0=TD();
   await LN.createChannel({id:"alarms",name:"الارم کارها",importance:5,visibility:1,vibration:true});
   const q=await LN.getPending();if(q.notifications.length)await LN.cancel({notifications:q.notifications});
   const list=[];
-  tasks.forEach((t,i)=>{if(D0.e)return;if(D0.l&&!LIGHT().includes(t[2]))return;t[1].forEach((tm,j)=>{const [h,m]=tm.split(":").map(Number);list.push({id:i*10+j+1,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{on:{hour:h,minute:m},allowWhileIdle:true}})})});
-  if(D0.e)for(let k=1;k<=3;k++)tasks.forEach((t,i)=>t[1].forEach((tm,j)=>{const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,...tm.split(":").map(Number),0),g=d.getDay();
+  tasks.forEach((t,i)=>{if(D0.e)return;if(D0.l&&!LIGHT().includes(t[2]))return;
+   const dys=[0,1,2,3,4,5,6].filter(w=>vis1(t,w));
+   t[1].forEach((tm,j)=>{const [h,m]=tm.split(":").map(Number);
+    const mk=(id,on)=>list.push({id,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{on,allowWhileIdle:true}});
+    if(dys.length===7)mk(i*10+j+1,{hour:h,minute:m});
+    else dys.forEach(w=>mk(20000+i*100+j*10+w+1,{weekday:w+1,hour:h,minute:m}))})});
+  if(D0.e)for(let k=1;k<=3;k++)tasks.forEach((t,i)=>t[1].forEach((tm,j)=>{const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,...tm.split(":").map(Number),0),g=d.getDay();if(!vis1(t,g))return;
    list.push({id:3000+k*100+i*3+j,title:t[0],body:"وقت این کار رسیده",channelId:"alarms",schedule:{at:d,allowWhileIdle:true}})}));
   for(let k=0;k<30;k++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+k,6,0,0);if(d<=new Date()||(k===0&&D0.e))continue;
    list.push({id:9100+k,title:"💬 پیام امروز",body:Q[qi(d)],channelId:"alarms",schedule:{at:d,allowWhileIdle:true}})}
@@ -335,13 +348,41 @@ $("ti").onkeydown=e=>{if(e.key==="Enter")$("ta").onclick()};
 function tab(n){$("v1").style.display=n===1?"":"none";$("v2").style.display=n===2?"":"none";$("tab1").classList.toggle("on",n===1);$("tab2").classList.toggle("on",n===2);$("sb1").classList.toggle("on",n===1);$("sb2").classList.toggle("on",n===2)}
 $("tab1").onclick=()=>tab(1);$("tab2").onclick=()=>tab(2);
 renderT();
-const WDN=[["شنبه و یکشنبه",[6,0]],["پنجشنبه و جمعه",[4,5]]];
+let wmOpen=[false,false],wmNew=[{n:"",t:["08:00"],c:"کار"},{n:"",t:["08:00"],c:"کار"}];
+function wmPanel(gi){
+ const P=document.createElement("div");P.className="cd";P.style.padding="6px 4px 12px";
+ const h1=document.createElement("div");h1.style.fontWeight="bold";h1.textContent="کارهایی که در این روزها حذف شوند";P.appendChild(h1);
+ const norm=tasks.filter(t=>t[4]==null);
+ if(!norm.length){const e=document.createElement("div");e.textContent="هنوز کاری نداری.";P.appendChild(e)}
+ norm.forEach(t=>{const l=document.createElement("label");l.className="ck";const c=document.createElement("input");c.type="checkbox";c.checked=wcfg[gi].hide.includes(t[2]);
+  c.onchange=()=>{wcfg[gi].hide=wcfg[gi].hide.filter(x=>x!==t[2]);if(c.checked)wcfg[gi].hide.push(t[2]);sv("wcfg",wcfg);render();sched()};
+  const sp=document.createElement("span");sp.textContent=t[0];l.append(c,sp);P.appendChild(l)});
+ const h2=document.createElement("div");h2.style.cssText="font-weight:bold;margin-top:12px";h2.textContent="کارهای جایگزین (فقط این روزها)";P.appendChild(h2);
+ tasks.filter(t=>t[4]===gi).forEach(t=>{
+  const r=document.createElement("div");r.style.cssText="border-top:1px solid var(--line);padding:6px 0";
+  const tp=document.createElement("div");tp.className="head";const nm=document.createElement("b");nm.textContent=t[0];
+  const dl=document.createElement("button");dl.className="lt";dl.textContent="حذف";dl.style.borderColor="var(--no)";dl.style.color="var(--no)";
+  dl.onclick=()=>{tasks=tasks.filter(x=>x!==t);saveTasks();render();wmRender()};tp.append(nm,dl);
+  const tm=document.createElement("div");tm.className="times";renderTimes(t[1],tm,()=>{saveTasks();wmRender()});
+  r.append(tp,tm);P.appendChild(r)});
+ const f=document.createElement("div");f.style.marginTop="8px";
+ const inp=document.createElement("input");inp.className="reason";inp.style.marginTop="0";inp.placeholder="کار جایگزین... (مثلاً چک کردن هفته معاملاتی)";inp.value=wmNew[gi].n;inp.oninput=()=>{wmNew[gi].n=inp.value};
+ const cb=document.createElement("div");cb.style.cssText="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap";renderCat(cb,()=>wmNew[gi].c,v=>{wmNew[gi].c=v});
+ const tt=document.createElement("div");tt.className="times";renderTimes(wmNew[gi].t,tt,wmRender);
+ const ad=document.createElement("button");ad.className="lt on";ad.textContent="افزودن کار جایگزین";
+ ad.onclick=()=>{const n=wmNew[gi].n.trim();if(!n)return;const id=tasks.reduce((m,x)=>Math.max(m,x[2]),99)+1;tasks.push([n,wmNew[gi].t.filter(Boolean),id,wmNew[gi].c,gi]);wmNew[gi]={n:"",t:["08:00"],c:"کار"};saveTasks();render();wmRender()};
+ f.append(inp,cb,tt,ad);P.appendChild(f);return P}
 function wmRender(){
- $("wmd").textContent="WEEKEND MODE برای روزهایی است که برنامه‌ات با روزهای عادی فرق دارد. هر روزی که پایین انتخاب کنی خودکار در این حالت ثبت می‌شود و دکمه‌اش در منو روشن می‌شود.";
+ $("wmd").textContent="WEEKEND MODE برای روزهایی است که برنامه‌ات با روزهای عادی فرق دارد. هر گزینه را که روشن کنی یک فلش ⌄ کنارش می‌آید. با زدن آن می‌توانی کارهایی را که در آن روزها نباید باشند حذف کنی و کارهای جایگزین با ساعت دلخواه اضافه کنی.";
  const L=$("wml");L.innerHTML="";
- WDN.forEach(a=>{const l=document.createElement("label");l.className="ck";const c=document.createElement("input");c.type="checkbox";c.checked=a[1].every(d=>wdays.includes(d));
-  c.onchange=()=>{wdays=wdays.filter(x=>!a[1].includes(x));if(c.checked)wdays=wdays.concat(a[1]);sv("wdays",wdays);render();wmRender()};
-  const sp=document.createElement("span");sp.textContent=a[0];l.append(c,sp);L.appendChild(l)});
+ WDN.forEach((a,gi)=>{
+  const on=a[1].every(d=>wdays.includes(d));
+  const l=document.createElement("label");l.className="ck";const c=document.createElement("input");c.type="checkbox";c.checked=on;
+  c.onchange=()=>{wdays=wdays.filter(x=>!a[1].includes(x));if(c.checked)wdays=wdays.concat(a[1]);sv("wdays",wdays);render();sched();wmRender()};
+  const sp=document.createElement("span");sp.style.flex="1";sp.textContent=a[0];l.append(c,sp);
+  if(on){const ar=document.createElement("button");ar.className="add";ar.textContent=wmOpen[gi]?"⌃":"⌄";ar.onclick=e=>{e.preventDefault();wmOpen[gi]=!wmOpen[gi];wmRender()};l.appendChild(ar)}
+  L.appendChild(l);
+  if(on&&wmOpen[gi])L.appendChild(wmPanel(gi))});
 }
 $("wk").onclick=()=>{$("mn").style.display="none";wmRender();$("wm").style.display="flex"};
 $("wmx").onclick=()=>{$("wm").style.display="none"};
@@ -487,9 +528,10 @@ function drawCandles(){
  let g="";[0,50,75].forEach(v=>{g+='<line x1="30" x2="'+W+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#8fa89b" stroke-opacity="'+(v?.35:.6)+'" stroke-dasharray="3 4"/><text x="2" y="'+(y(v)+3)+'" fill="#8fa89b" font-size="9">'+fa(v)+'٪</text>'});
  CATS.forEach((c,i)=>{const x=34+(i+.5)*(st-6),cur=A[c].p,prev=B[c].p;
   g+='<text x="'+x+'" y="'+(H-24)+'" fill="#e9f6ef" font-size="12" text-anchor="middle">'+c+'</text>';
-  if(cur===null){g+='<text x="'+x+'" y="'+(H-8)+'" fill="#8fa89b" font-size="11" text-anchor="middle">بدون داده</text>';return}
-  const dy=A[c].days,op=prev===null?dy[0]:prev,cs=cur,hi=Math.max(op,cs,...dy),lo=Math.min(op,cs,...dy),cl=col(cur),d=Math.round(cur-(prev===null?cur:prev)),bt=y(Math.max(op,cs)),bh=Math.max(Math.abs(y(op)-y(cs)),3);
-  g+='<line x1="'+x+'" x2="'+x+'" y1="'+y(hi)+'" y2="'+y(lo)+'" stroke="'+cl+'" stroke-width="1.8" stroke-linecap="round"/><line x1="'+(x-5)+'" x2="'+(x+5)+'" y1="'+y(hi)+'" y2="'+y(hi)+'" stroke="'+cl+'" stroke-width="1.8"/><line x1="'+(x-5)+'" x2="'+(x+5)+'" y1="'+y(lo)+'" y2="'+y(lo)+'" stroke="'+cl+'" stroke-width="1.8"/><rect x="'+(x-14)+'" y="'+bt+'" width="28" height="'+bh+'" rx="2" fill="'+cl+'" fill-opacity="1" stroke="'+cl+'" stroke-width="2"/>';
+  if(cur===null){g+='<line x1="'+x+'" x2="'+x+'" y1="'+(y(50)-30)+'" y2="'+(y(50)+30)+'" stroke="#8fa89b" stroke-opacity=".35" stroke-dasharray="3 3"/><rect x="'+(x-14)+'" y="'+(y(50)-12)+'" width="28" height="24" rx="3" fill="none" stroke="#8fa89b" stroke-opacity=".45" stroke-dasharray="3 3"/><text x="'+x+'" y="'+(H-8)+'" fill="#8fa89b" font-size="11" text-anchor="middle">بدون داده</text>';return}
+  const cl=col(cur),d=Math.round(cur-(prev===null?cur:prev)),y0=y(0),yt=Math.min(y(cur),y0-3),h=y0-yt,r=Math.min(6,h);
+  g+='<path d="M'+(x-14)+' '+y0+'V'+(yt+r)+'Q'+(x-14)+' '+yt+' '+(x-14+r)+' '+yt+'H'+(x+14-r)+'Q'+(x+14)+' '+yt+' '+(x+14)+' '+(yt+r)+'V'+y0+'Z" fill="'+cl+'"/>';
+  if(prev!==null)g+='<line x1="'+(x-19)+'" x2="'+(x+19)+'" y1="'+y(prev)+'" y2="'+y(prev)+'" stroke="#e9f6ef" stroke-width="1.5" stroke-dasharray="3 2" stroke-opacity=".85"/>';
   g+='<text x="'+x+'" y="'+(H-8)+'" fill="'+cl+'" font-size="11" font-weight="bold" text-anchor="middle">'+fa(Math.round(cur))+'٪'+(prev===null?"":d>0?" ▲"+fa(d):d<0?" ▼"+fa(-d):" ＝")+'</text>'});
  $("cdl").innerHTML=g;const s0=wkStart(wo);
  $("cdr").textContent="از تاریخ "+fmt({year:"numeric",month:"long",day:"numeric"},s0)+" تا "+fmt({year:"numeric",month:"long",day:"numeric"},addD(s0,6));
@@ -521,7 +563,7 @@ $("sb1").onclick=()=>tab(1);$("sb2").onclick=()=>tab(2);$("sb3").onclick=()=>$("
 $("gt").onclick=()=>{wo=0;selDay(new Date(now.getFullYear(),now.getMonth(),now.getDate()))};
 $("wpv").onclick=$("cwp").onclick=()=>wkShift(-1);$("wnx").onclick=$("cwn").onclick=()=>wkShift(1);
 (function(){const v=$("v1"),M=document.createElement("div"),S=document.createElement("div");M.className="colM";S.className="colS";
- ["weekc","addc","list","notecard","notescard","msg"].forEach(i=>M.appendChild($(i)));["quotec","todayc","ringc","scorec","goalc","calc"].forEach(i=>S.appendChild($(i)));v.append(M,S);
+ ["weekc","addc","list","notecard","notescard","msg"].forEach(i=>M.appendChild($(i)));["quotec","todayc","duo","goalc","calc"].forEach(i=>S.appendChild($(i)));v.append(M,S);
  $("snav").prepend($("menu"),$("lt"),$("em"),$("pencil"))})();
 
 function openIns(){
